@@ -41,6 +41,9 @@ Pharo 13: 590 packages, 7,259 classes, 92,236 methods -> pharo-13.jsonl.gz
 Pharo 14: fetching https://codeload.github.com/pharo-project/pharo/tar.gz/3221b560a7cbcb4361c8be367d3efdc8e2303459
 Pharo 14: 586 packages, 7,404 classes, 91,424 methods -> pharo-14.jsonl.gz
 
+==> Section IV: check of the image reader on Pharo 2
+Pharo 2: 58,925 of the 58,925 methods of the export are found by the image reader in image 20628 (59,098 methods in the image)
+
 ==> Corpus validation
 Pharo 1.0  image      141 packages  2,982 classes   51,820 methods
 Pharo 1.1  image      184 packages  3,204 classes   55,178 methods
@@ -134,6 +137,9 @@ Saved /Users/omar/Desktop/replication-package-pharo-evolution/results/vocabulary
 ==> RQ2: package families
 Method selectors: 307 families with at least 20 distinct identifiers; Spearman rho between family size and cohesion -0.73
   129 families present in at least 6 snapshots: 36 increasing, 47 decreasing, 46 no trend (|rho| >= 0.5); 117 of them (91%) vary by less than 0.15
+Class names: 124 families with at least 20 distinct identifiers; Spearman rho between family size and cohesion -0.51
+  82 families present in at least 6 snapshots: 29 increasing, 28 decreasing, 25 no trend (|rho| >= 0.5); 65 of them (79%) vary by less than 0.15
+Method selectors: most and least cohesive families
   Highest ConfigurationOfRubric               2 snapshots,    100 identifiers, mean cohesion 1.000, range 0.000
   Highest ConfigurationOfZincHTTPComponents   3 snapshots,     90 identifiers, mean cohesion 0.977, range 0.003
   Highest ConfigurationOfEpicea               1 snapshots,    178 identifiers, mean cohesion 0.962, range 0.000
@@ -154,8 +160,7 @@ Method selectors: 307 families with at least 20 distinct identifiers; Spearman r
   Lowest  Rubric                             11 snapshots,  1,937 identifiers, mean cohesion 0.522, range 0.008
   Lowest  Spec2                               1 snapshots,  3,659 identifiers, mean cohesion 0.523, range 0.000
   Lowest  Athens                             12 snapshots,  1,175 identifiers, mean cohesion 0.523, range 0.010
-Class names: 124 families with at least 20 distinct identifiers; Spearman rho between family size and cohesion -0.51
-  82 families present in at least 6 snapshots: 29 increasing, 28 decreasing, 25 no trend (|rho| >= 0.5); 65 of them (79%) vary by less than 0.15
+Class names: most and least cohesive families
   Highest Gofer                              16 snapshots,     37 identifiers, mean cohesion 1.000, range 0.000
   Highest RPackage                           10 snapshots,     40 identifiers, mean cohesion 0.993, range 0.017
   Highest Komitter                            4 snapshots,     49 identifiers, mean cohesion 0.980, range 0.016
@@ -176,6 +181,38 @@ Class names: 124 families with at least 20 distinct identifiers; Spearman rho be
   Lowest  General                             3 snapshots,    247 identifiers, mean cohesion 0.493, range 0.023
   Lowest  Versionner                          4 snapshots,    145 identifiers, mean cohesion 0.496, range 0.029
   Lowest  Pillar                              2 snapshots,     76 identifiers, mean cohesion 0.496, range 0.000
+Method selectors: families named in the text
+  Morphic      present 1.0 to 14, mean cohesion 0.474, 0.463 in 1.0 and 0.481 in 14, range 0.022
+  System       present 1.0 to 14, mean cohesion 0.503, 0.487 in 1.0 and 0.532 in 14, range 0.055
+  Kernel       present 1.0 to 14, mean cohesion 0.512, 0.451 in 1.0 and 0.560 in 14, range 0.111
+  Graphics     present 1.0 to 14, mean cohesion 0.522, 0.495 in 1.0 and 0.540 in 14, range 0.055
+  Collections  present 1.0 to 14, mean cohesion 0.579, 0.481 in 1.0 and 0.623 in 14, range 0.142
+Class names: families named in the text
+  Metacello    present 1.0 to 14, mean cohesion 0.965, 1.000 in 1.0 and 1.000 in 14, range 0.092
+  Athens       present 3 to 14, mean cohesion 0.979, 0.979 in 3 and 0.978 in 14, range 0.018
+  Zinc         present 1.3 to 14, mean cohesion 0.463, 0.462 in 1.3 and 0.478 in 14, range 0.033
+  Monticello   present 1.0 to 14, mean cohesion 0.498, 0.499 in 1.0 and 0.491 in 14, range 0.032
+  Refactoring  present 1.0 to 14, mean cohesion 0.466, 0.450 in 1.0 and 0.345 in 14, range 0.223
+  OB           present 1.0 to 1.4, mean cohesion 0.466, 0.459 in 1.0 and 0.487 in 1.4, range 0.028
+  Glamour      present 1.2 to 9, mean cohesion 0.628, 0.770 in 1.2 and 0.628 in 9, range 0.146
+  GT           present 4 to 9, mean cohesion 0.698, 0.817 in 4 and 0.679 in 9, range 0.197
+  Spec         present 2 to 9, mean cohesion 0.680, 0.624 in 2 and 0.727 in 9, range 0.103
+  Calypso      present 8 to 14, mean cohesion 0.616, 0.612 in 8 and 0.620 in 14, range 0.008
+Sensitivity: families with at least 1 distinct identifiers
+Method selectors: 478 families with at least 1 distinct identifiers; Spearman rho between family size and cohesion -0.88
+  188 families present in at least 6 snapshots: 42 increasing, 50 decreasing, 96 no trend (|rho| >= 0.5); 171 of them (91%) vary by less than 0.15
+Class names: 465 families with at least 1 distinct identifiers; Spearman rho between family size and cohesion -0.85
+  185 families present in at least 6 snapshots: 37 increasing, 41 decreasing, 107 no trend (|rho| >= 0.5); 157 of them (85%) vary by less than 0.15
+Sensitivity: families with at least 10 distinct identifiers
+Method selectors: 346 families with at least 10 distinct identifiers; Spearman rho between family size and cohesion -0.76
+  136 families present in at least 6 snapshots: 37 increasing, 49 decreasing, 50 no trend (|rho| >= 0.5); 122 of them (90%) vary by less than 0.15
+Class names: 181 families with at least 10 distinct identifiers; Spearman rho between family size and cohesion -0.59
+  105 families present in at least 6 snapshots: 33 increasing, 36 decreasing, 36 no trend (|rho| >= 0.5); 83 of them (79%) vary by less than 0.15
+Sensitivity: families with at least 50 distinct identifiers
+Method selectors: 244 families with at least 50 distinct identifiers; Spearman rho between family size and cohesion -0.68
+  115 families present in at least 6 snapshots: 33 increasing, 42 decreasing, 40 no trend (|rho| >= 0.5); 106 of them (92%) vary by less than 0.15
+Class names: 76 families with at least 50 distinct identifiers; Spearman rho between family size and cohesion -0.35
+  55 families present in at least 6 snapshots: 17 increasing, 20 decreasing, 18 no trend (|rho| >= 0.5); 44 of them (80%) vary by less than 0.15
 
 ==> RQ1 and RQ3: Table III and Figure 1
 Selectors, prefix length 1: 0.450 to 0.561 (+0.110), Spearman rho +0.99, slope +0.0073
@@ -247,6 +284,11 @@ Class names: families shown in the figure
   Network                  all      n 63 -> 59  change +0.0031  share of slope -10%
   CollectionsTests         1.0--4   n 115 -> 0  change +0.0035  share of slope -12%
   Athens                   3--14    n 0 -> 140  change +0.0057  share of slope -14%
+Class names, 1.4 -> 2: change -0.0197; without the 29 families entering in 2: -0.0111 (44% of the decrease removed)
+Class names, 7 -> 8: change -0.0172; without the 58 families entering in 8: -0.0041 (76% of the decrease removed)
+Class names, 1.3 -> 1.4: change -0.0130; without the 14 families entering in 1.4: -0.0076 (42% of the decrease removed)
+OB in Pharo 1.0: 412 of 412 classes start with OB or OR
+Calypso in Pharo 14: 700 of 712 classes start with Cly
 Saved /Users/omar/Desktop/replication-package-pharo-evolution/results/family_contributions.tex
 
 ==> RQ4: Figures 4 to 6 (conceptual cohesion)
@@ -391,6 +433,18 @@ Saved /Users/omar/Desktop/replication-package-pharo-evolution/results/ccp_family
 
 ==> RQ4: similarity between families
 Nearest family / own CCP over 1180 family-releases: median 0.41, 90th percentile 0.86, at least one in 4.2%
+Nearest family reaches the own CCP in 49 of 1180 family-releases: {'tests': 6, 'low own CCP': 24, 'split': 16, 'successor': 3}
+  Deprecated13   own CCP at most 0.039, nearest Tools
+  Deprecated14   own CCP at most 0.037, nearest Shout
+  Kernel         own CCP at most 0.031, nearest Slot, Traits
+  Monticello     own CCP at most 0.115, nearest MonticelloFileTree, MonticelloMocks
+  Morphic        own CCP at most 0.054, nearest Polymorph, SimpleMorphic
+  Network        own CCP at most 0.055, nearest NetworkTests, Zodiac
+  Refactoring    own CCP at most 0.110, nearest Refactoring2
+  Renraku        own CCP at most 0.122, nearest General, GeneralRules
+  System         own CCP at most 0.033, nearest Files, RPackage, RecentSubmissions, Settings, Tools
+  Tests          own CCP at most 0.066, nearest MorphicTests
+  Tool           own CCP at most 0.062, nearest MonticelloGUI
 62 distinct pairs among the 10 most similar of each release: {'split': 18, 'related': 30, 'tests': 8, 'successor': 6}
   split        Monticello--MonticelloFileTree: 11 releases, last 13 similarity 0.127 (ratio 1.11) ['mc', 'definition', 'version', 'file', 'info']
   related      Files--MonticelloFileTree: 10 releases, last 12 similarity 0.096 (ratio 0.62) ['file', 'write', 'stream', 'exist', 'name']

@@ -43,6 +43,16 @@ RANGE_THRESHOLD = 0.15
 
 PANEL_TITLES = {"method": "Method selectors", "class": "Class names"}
 
+# Other thresholds on the family vocabulary, to check that RQ2 does not depend on it.
+SENSITIVITY_THRESHOLDS = (1, 10, 50)
+
+# Families named in the text of RQ2 and RQ3, by identifier kind.
+NAMED_FAMILIES = {
+    "method": ("Morphic", "System", "Kernel", "Graphics", "Collections"),
+    "class": ("Metacello", "Athens", "Zinc", "Monticello", "Refactoring",
+              "OB", "Glamour", "GT", "Spec", "Calypso"),
+}
+
 FamilyRecords = dict[str, dict[str, list[IdentifierRecord]]]  # version -> family -> records
 
 
@@ -221,9 +231,8 @@ def top_bottom_rows(
     ]
 
 
-def report(metric_rows: list[dict], summary_rows: list[dict], minimum: int = MIN_FAMILY_IDENTIFIERS) -> None:
-    """Print the numbers of RQ2: families analyzed, their trends, their range of
-    cohesion, and the most and least cohesive ones."""
+def print_overview(metric_rows: list[dict], summary_rows: list[dict], minimum: int) -> None:
+    """Families analyzed, size correlation, and how many rise, fall, or stay."""
     for identifier_kind, label in PANEL_TITLES.items():
         summaries = [row for row in summary_rows if row["identifier_kind"] == identifier_kind]
         counts = family_trend_summary(metric_rows, summary_rows, identifier_kind)
@@ -240,6 +249,34 @@ def report(metric_rows: list[dict], summary_rows: list[dict], minimum: int = MIN
             f"{counts['no_trend']} no trend (|rho| >= {TREND_THRESHOLD}); {narrow} of them "
             f"({narrow / len(lifetime):.0%}) vary by less than {RANGE_THRESHOLD}"
         )
+
+
+def print_named_families(metric_rows: list[dict], summary_rows: list[dict]) -> None:
+    """Lifetime, mean cohesion, and first and last cohesion of the families named in the text."""
+    series: dict[tuple[str, str], dict[str, float]] = defaultdict(dict)
+    for row in metric_rows:
+        if row["weighting"] == PRIMARY_WEIGHTING and row["aggregation"] == POOLED:
+            series[(row["identifier_kind"], row["package_family"])][row["version"]] = row["cohesion"]
+    summaries = {(row["identifier_kind"], row["package_family"]): row for row in summary_rows}
+    for identifier_kind, families in NAMED_FAMILIES.items():
+        print(f"{PANEL_TITLES[identifier_kind]}: families named in the text")
+        for family in families:
+            row = summaries[(identifier_kind, family)]
+            values = series[(identifier_kind, family)]
+            first, last = row["first_version"], row["last_version"]
+            print(
+                f"  {family:<12} present {first} to {last}, mean cohesion "
+                f"{fmt(row['weighted_mean_cohesion'])}, {fmt(values[first])} in {first} and "
+                f"{fmt(values[last])} in {last}, range {fmt(row['range_cohesion'])}"
+            )
+
+
+def report(metric_rows: list[dict], summary_rows: list[dict], minimum: int = MIN_FAMILY_IDENTIFIERS) -> None:
+    """Print the numbers of RQ2: families analyzed, their trends, their range of
+    cohesion, and the most and least cohesive ones."""
+    print_overview(metric_rows, summary_rows, minimum)
+    for identifier_kind, label in PANEL_TITLES.items():
+        print(f"{label}: most and least cohesive families")
         for row in top_bottom_rows(summary_rows, identifier_kind):
             print(
                 f"  {row['group']:<7} {row['package_family']:<34} {row['versions_observed']:2} "
@@ -263,6 +300,11 @@ def main() -> None:
     metric_rows, summary_rows = analyze_package_families(corpus, args.min_identifiers)
 
     report(metric_rows, summary_rows, args.min_identifiers)
+    print_named_families(metric_rows, summary_rows)
+
+    for minimum in SENSITIVITY_THRESHOLDS:
+        print(f"Sensitivity: families with at least {minimum} distinct identifiers")
+        print_overview(*analyze_package_families(corpus, minimum), minimum)
 
 
 if __name__ == "__main__":

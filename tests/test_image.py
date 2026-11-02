@@ -31,3 +31,9 @@ def test_unsupported_image_format_is_rejected():
     spur_header = struct.pack("<5I", 68021, 64, 0, 0, 0) + bytes(44)
     with pytest.raises(ImageFormatError):
         ObjectMemory(spur_header)
+
+
+def test_packages_differing_only_in_case_resolve_the_same_way_every_time():
+    # Set order changes between runs; the choice must not.
+    for names in ({"BogusExt", "Bogusext"}, {"Bogusext", "BogusExt"}):
+        assert PackageResolver(names).package_of_extension("*bogusext") == "Bogusext"

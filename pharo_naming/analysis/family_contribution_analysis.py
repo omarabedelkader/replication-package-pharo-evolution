@@ -187,6 +187,41 @@ def write_contribution_figure(path: Path, versions: list[str], results: dict[str
     plt.close(fig)
 
 
+# Project prefixes cited in the introduction: (release, family, prefixes).
+PROJECT_PREFIXES = (("1.0", "OB", ("OB", "OR")), ("14", "Calypso", ("Cly",)))
+
+
+def print_largest_drops(corpus: Corpus, count: int = 3) -> None:
+    """The largest release-to-release decreases of class-name cohesion, and
+    what is left of each without the families that enter in that release."""
+    versions = list(corpus)
+    releases = [name_families(records, "class") for records in corpus.values()]
+    encoded = [encode_vocabulary(list(release)) for release in releases]
+    series = cohesion_series(releases, encoded, set())
+    presence = family_presence(versions, releases)
+    steps = np.diff(series)
+    for index in np.argsort(steps)[:count]:
+        version = versions[index + 1]
+        entering = {family for family, present in presence.items() if present[0] == version}
+        without = cohesion_series(releases, encoded, entering)
+        step_without = without[index + 1] - without[index]
+        print(
+            f"Class names, {versions[index]} -> {version}: change {steps[index]:+.4f}; without the "
+            f"{len(entering)} families entering in {version}: {step_without:+.4f} "
+            f"({1 - step_without / steps[index]:.0%} of the decrease removed)"
+        )
+
+
+def print_project_prefixes(corpus: Corpus) -> None:
+    for version, family, prefixes in PROJECT_PREFIXES:
+        names = [
+            record.class_name for record in corpus[version]
+            if record.kind == "class" and package_family(record.package) == family
+        ]
+        matching = sum(name.startswith(prefixes) for name in names)
+        print(f"{family} in Pharo {version}: {matching} of {len(names)} classes start with {' or '.join(prefixes)}")
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--corpus-dir", type=Path, default=CORPUS_DIR)
@@ -221,6 +256,9 @@ def main() -> None:
                 f"n {row['first_size']:,} -> {row['last_size']:,}  change {row['change']:+.4f}  "
                 f"share of slope {row['slope_share']:+.0%}"
             )
+
+    print_largest_drops(corpus)
+    print_project_prefixes(corpus)
 
     output = args.results_dir / "family_contributions.tex"
     write_contribution_figure(output, versions, results)

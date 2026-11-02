@@ -91,9 +91,9 @@ PAIR_CATEGORIES: dict[frozenset[str], str] = {
 }
 
 
-def analyze_release(version: str, records: list[IdentifierRecord]) -> tuple[list[dict], list[float]]:
-    """Every pair of analyzed families with its similarity, and the ratio of
-    each family's nearest-family similarity to its own CCP."""
+def analyze_release(version: str, records: list[IdentifierRecord]) -> tuple[list[dict], list[dict]]:
+    """Every pair of analyzed families with its similarity, and for each family
+    its nearest family with the ratio of their similarity to its own CCP."""
     documents = class_documents(records)
     ccp, _, data = family_ccp(documents)
     vectors, rows = data["vectors"], data["rows"]
@@ -118,20 +118,25 @@ def analyze_release(version: str, records: list[IdentifierRecord]) -> tuple[list
             "ratio": similarity / min(ccp[first], ccp[second]),
             "words": [str(word) for word in words[np.argsort(-contribution)[:SHARED_WORDS]]],
         })
-    nearest = defaultdict(float)
+    nearest: dict[str, tuple[float, str]] = {}
     for pair in pairs:
-        for family in (pair["first"], pair["second"]):
-            nearest[family] = max(nearest[family], pair["similarity"])
-    return pairs, [nearest[family] / ccp[family] for family in rows]
+        for family, other in ((pair["first"], pair["second"]), (pair["second"], pair["first"])):
+            if family not in nearest or pair["similarity"] > nearest[family][0]:
+                nearest[family] = (pair["similarity"], other)
+    return pairs, [
+        {"version": version, "family": family, "nearest": nearest[family][1],
+         "ratio": nearest[family][0] / ccp[family], "ccp": ccp[family]}
+        for family in rows
+    ]
 
 
-def analyze(corpus: Corpus) -> tuple[list[dict], np.ndarray]:
-    top, ratios = [], []
+def analyze(corpus: Corpus) -> tuple[list[dict], list[dict]]:
+    top, nearest = [], []
     for version, records in corpus.items():
-        pairs, release_ratios = analyze_release(version, records)
+        pairs, release_nearest = analyze_release(version, records)
         top.extend(sorted(pairs, key=lambda pair: -pair["similarity"])[:TOP_PAIRS])
-        ratios.extend(release_ratios)
-    return top, np.array(ratios)
+        nearest.extend(release_nearest)
+    return top, nearest
 
 
 def category(pair: dict) -> str:
@@ -165,11 +170,25 @@ def main() -> None:
     args = parser.parse_args()
 
     corpus = read_corpus(args.corpus_dir)
-    top, ratios = analyze(corpus)
+    top, nearest = analyze(corpus)
+    ratios = np.array([row["ratio"] for row in nearest])
     print(
         f"Nearest family / own CCP over {len(ratios)} family-releases: median {np.median(ratios):.2f}, "
         f"90th percentile {np.percentile(ratios, 90):.2f}, at least one in {np.mean(ratios >= 1):.1%}"
     )
+    # Family-releases whose nearest family is at least as similar as the family itself.
+    reached = [row for row in nearest if row["ratio"] >= 1]
+    by_category = Counter(
+        PAIR_CATEGORIES.get(frozenset((row["family"], row["nearest"])), "low own CCP") for row in reached
+    )
+    print(f"Nearest family reaches the own CCP in {len(reached)} of {len(nearest)} family-releases: {dict(by_category)}")
+    partners: dict[str, set[str]] = defaultdict(set)
+    highest_ccp: dict[str, float] = defaultdict(float)
+    for row in reached:
+        partners[row["family"]].add(row["nearest"])
+        highest_ccp[row["family"]] = max(highest_ccp[row["family"]], row["ccp"])
+    for family in sorted(partners):
+        print(f"  {family:<14} own CCP at most {highest_ccp[family]:.3f}, nearest {', '.join(sorted(partners[family]))}")
     pairs = distinct_pairs(top)
     counts = Counter(category(occurrences[0]) for occurrences in pairs.values())
     print(f"{len(pairs)} distinct pairs among the {TOP_PAIRS} most similar of each release: {dict(counts)}")

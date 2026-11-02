@@ -1,3 +1,4 @@
+import pytest
 import math
 
 from pharo_naming.analysis.corpus_statistics import analyze_records
@@ -113,6 +114,9 @@ def test_trend_of_a_straight_line():
     assert math.isclose(trend["relative_change_percent"], 300.0)
 
 
+# The toy corpus has no class names, so their series is constant and Spearman
+# warns that its correlation is undefined; only the selector series is checked.
+@pytest.mark.filterwarnings("ignore::scipy.stats.ConstantInputWarning")
 def test_trend_rows_follow_the_historical_order():
     corpus = {
         version: [method(version, "Kernel", "A", name) for name in names]

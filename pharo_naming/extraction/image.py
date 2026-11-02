@@ -401,7 +401,10 @@ class PackageResolver:
     """
 
     def __init__(self, package_names: set[str]) -> None:
-        self._packages = {name.lower(): name for name in package_names if name}
+        # Lookups ignore case, and some images hold two packages whose names
+        # differ only in case (``BogusExt`` and ``Bogusext``).  Sorting makes the
+        # choice independent of set order: the last name in sorted order wins.
+        self._packages = {name.lower(): name for name in sorted(package_names) if name}
 
     def _lookup(self, label: str) -> str | None:
         key = label.lower()

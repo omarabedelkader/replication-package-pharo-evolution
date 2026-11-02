@@ -82,6 +82,8 @@ fi
 if [[ "$BUILD_CORPUS" -eq 1 ]]; then
     step "Corpus: downloading the releases and extracting their declarations"
     run pharo_naming.extraction.build_corpus
+    step "Section IV: check of the image reader on Pharo 2"
+    run pharo_naming.analysis.validate_image_reader
 fi
 
 step "Corpus validation";                             run pharo_naming.analysis.validate_corpus
