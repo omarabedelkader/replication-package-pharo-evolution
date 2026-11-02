@@ -1,0 +1,28 @@
+\begin{table}[t]
+\centering
+\caption{Pooled prefix cohesion (lengths 1--4) under the robustness analyses (green: increase, red: decrease).}
+\label{tab:robustness}
+\footnotesize
+\setlength{\tabcolsep}{2.5pt}
+\begin{tabular}{llrrrr}
+\toprule
+\headerrow Identifiers & Analysis & First & Last & Change & Slope\\
+\midrule
+Selectors & Whole system & 0.492 & 0.547 & \textcolor{green!50!black}{+0.055} & \textcolor{green!50!black}{+0.0034}\\
+ & Equal-size samples (20,000) & 0.486 & 0.534 & \textcolor{green!50!black}{+0.048} & \textcolor{green!50!black}{+0.0027}\\
+ & Persistent families (15) & 0.448 & 0.506 & \textcolor{green!50!black}{+0.058} & \textcolor{green!50!black}{+0.0045}\\
+ & Without test names & 0.462 & 0.475 & \textcolor{green!50!black}{+0.012} & \textcolor{green!50!black}{+0.0007}\\
+ & Case preserved & 0.502 & 0.554 & \textcolor{green!50!black}{+0.052} & \textcolor{green!50!black}{+0.0034}\\
+ & Occurrence-weighted & 0.519 & 0.552 & \textcolor{green!50!black}{+0.033} & \textcolor{green!50!black}{+0.0023}\\
+ & Top-1 probability & 0.611 & 0.637 & \textcolor{green!50!black}{+0.027} & \textcolor{green!50!black}{+0.0012}\\
+\midrule
+Class names & Whole system & 0.489 & 0.452 & \textcolor{red!75!black}{$-$0.037} & \textcolor{red!75!black}{$-$0.0029}\\
+ & Equal-size samples (1,500) & 0.500 & 0.466 & \textcolor{red!75!black}{$-$0.034} & \textcolor{red!75!black}{$-$0.0023}\\
+ & Persistent families (14) & 0.501 & 0.506 & \textcolor{green!50!black}{+0.005} & \textcolor{green!50!black}{+0.0001}\\
+ & Without test names & 0.494 & 0.459 & \textcolor{red!75!black}{$-$0.035} & \textcolor{red!75!black}{$-$0.0027}\\
+ & Case preserved & 0.502 & 0.467 & \textcolor{red!75!black}{$-$0.035} & \textcolor{red!75!black}{$-$0.0029}\\
+ & Occurrence-weighted & 0.489 & 0.452 & \textcolor{red!75!black}{$-$0.037} & \textcolor{red!75!black}{$-$0.0029}\\
+ & Top-1 probability & 0.655 & 0.609 & \textcolor{red!75!black}{$-$0.045} & \textcolor{red!75!black}{$-$0.0037}\\
+\bottomrule
+\end{tabular}
+\end{table}
