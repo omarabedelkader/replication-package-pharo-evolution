@@ -1,0 +1,11 @@
+
+==> Preparing the Python environment
+
+==> Unit tests
+
+==> Corpus: downloading the releases and extracting their declarations
+Pharo 1.0: fetching https://files.pharo.org/image/10/10517.zip
+Pharo 1.0: 141 packages, 2,982 classes, 51,820 methods -> pharo-1.0.jsonl.gz
+Pharo 1.1: fetching https://files.pharo.org/image/11/11414.zip
+Pharo 1.1: 184 packages, 3,204 classes, 55,178 methods -> pharo-1.1.jsonl.gz
+Pharo 1.2: fetching https://files.pharo.org/image/12/12353.zip
