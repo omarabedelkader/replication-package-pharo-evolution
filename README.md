@@ -24,7 +24,7 @@ Everything is written to `results/`:
 | `naming_conventions.tex` | Table I |
 | `corpus_size.tex` | Table II (size of each release, Section IV-A) |
 | `robustness_trends.tex` | Table III |
-| `robustness_full.tex` | additional result: first and last values, change and slope for all the robustness analyses (Section V-A) |
+| `robustness_full.tex` | additional result: first and last values, change, Spearman rho and slope for all the robustness analyses (Section V-A); the trend at each prefix length is in `numbers.txt` |
 | `cohesion_decomposition.tex` | Figure 1 |
 | `vocabulary_turnover.tex` | Figure 2 |
 | `family_contributions.tex` | Figure 3 |

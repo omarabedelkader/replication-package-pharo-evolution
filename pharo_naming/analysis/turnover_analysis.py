@@ -205,6 +205,15 @@ def main() -> None:
             f"removed {overall['removed']:,}, added {overall['added']:,}, "
             f"transient {result['transient']:,}, ever {result['ever']:,}"
         )
+        first = result["first"]
+        print(
+            f"  relative to Pharo {next(iter(corpus))}: kept {overall['kept'] / first:.1%}, "
+            f"kept in none of the original families {overall['relocated'] / first:.1%}, "
+            f"added {overall['added'] / first:.1%} "
+            f"({overall['added'] / overall['kept']:.1f} added per kept name), "
+            f"transient {result['transient'] / result['last']:.1%} of the Pharo "
+            f"{list(corpus)[-1]} vocabulary"
+        )
         for step in result["steps"]:
             size = step["kept"] + step["removed"]
             print(

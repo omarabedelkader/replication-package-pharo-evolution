@@ -302,17 +302,22 @@ def write_paper_robustness_table(path: Path, rows: list[dict]) -> None:
     write_text(path, lines)
 
 
+def latex_rho(value: float) -> str:
+    """A Spearman coefficient with an explicit sign, as LaTeX."""
+    return f"{'+' if value >= 0 else '$-$'}{abs(value):.2f}"
+
+
 def write_robustness_table(path: Path, rows: list[dict]) -> None:
     lines = [
         r"\begin{table}[t]",
         r"\centering",
-        r"\caption{Pooled prefix cohesion (lengths 1--4) under the robustness analyses (green: increase, red: decrease).}",
+        r"\caption{Pooled prefix cohesion (lengths 1--4) under the robustness analyses: first and last release, change, Spearman $\rho$ with the release order, and slope per release (green: increase, red: decrease). Class names are declared once each, so counting declarations leaves their series unchanged.}",
         r"\label{tab:robustness-full}",
         r"\footnotesize",
         r"\setlength{\tabcolsep}{2.5pt}",
-        r"\begin{tabular}{llrrrr}",
+        r"\begin{tabular}{llrrrrr}",
         r"\toprule",
-        HEADER + r"Identifiers & Analysis & First & Last & Change & Slope\\",
+        HEADER + r"Identifiers & Analysis & First & Last & Change & $\rho$ & Slope\\",
         r"\midrule",
     ]
     previous = None
@@ -323,7 +328,8 @@ def write_robustness_table(path: Path, rows: list[dict]) -> None:
         lines.append(
             f"{'' if label == previous else label} & {row['analysis']} & "
             f"{fmt(row['first'])} & {fmt(row['last'])} & "
-            f"{signed(row['last'] - row['first'], 3)} & {signed(row['slope'], 4)}\\\\"
+            f"{signed(row['last'] - row['first'], 3)} & {latex_rho(row['rho'])} & "
+            f"{signed(row['slope'], 4)}\\\\"
         )
         previous = label
     lines.extend([r"\bottomrule", r"\end{tabular}", r"\end{table}"])
@@ -421,6 +427,7 @@ def main() -> None:
             "first": whole["first_value"],
             "last": whole["last_value"],
             "slope": whole["linear_slope"],
+            "rho": whole["spearman_rho"],
         })
 
         # 2. Vocabulary size.
@@ -433,7 +440,9 @@ def main() -> None:
         low, high = np.percentile(sample_slopes, INTERVAL)
         print(
             f"{KIND_LABELS[identifier_kind]}: {args.repetitions} equal-size samples of {size:,}; "
-            f"{INTERVAL[0]}th to {INTERVAL[1]}th percentile of the slope [{low:+.4f}, {high:+.4f}]"
+            f"{INTERVAL[0]}th to {INTERVAL[1]}th percentile of the slope [{low:+.4f}, {high:+.4f}]; "
+            f"{int((sample_slopes > 0).sum())} of {len(sample_slopes)} slopes positive, "
+            f"{int((sample_slopes < 0).sum())} negative"
         )
         rows.append({
             "identifier_kind": identifier_kind,
@@ -441,6 +450,7 @@ def main() -> None:
             "first": float(means[0]),
             "last": float(means[-1]),
             "slope": float(sample_slopes.mean()),
+            "rho": describe_trend(positions, list(means))["spearman_rho"],
         })
 
         # 3. Composition.
@@ -453,15 +463,16 @@ def main() -> None:
             "first": trend["first_value"],
             "last": trend["last_value"],
             "slope": trend["linear_slope"],
+            "rho": trend["spearman_rho"],
         })
         print(
             f"{KIND_LABELS[identifier_kind]}: {len(kept['families'])} persistent families "
             f"cover {min(kept['coverage']):.0%} to {max(kept['coverage']):.0%} of the "
             f"release vocabulary ({kept['coverage'][0]:.0%} in Pharo {versions[0]}, "
-            f"{kept['coverage'][-1]:.0%} in Pharo {versions[-1]}); their series has "
-            f"Spearman rho is {trend['spearman_rho']:+.2f}; "
-            f"{(sample_slopes > 0).mean():.0%} of the size-controlled slopes are positive"
+            f"{kept['coverage'][-1]:.0%} in Pharo {versions[-1]}); Spearman rho of their "
+            f"series {trend['spearman_rho']:+.2f}"
         )
+        print(f"  families: {', '.join(kept['families'])}")
 
         # 4. Test code.
         tests = without_test_identifiers(corpus, identifier_kind)
@@ -473,12 +484,23 @@ def main() -> None:
             "first": trend["first_value"],
             "last": trend["last_value"],
             "slope": trend["linear_slope"],
+            "rho": trend["spearman_rho"],
         })
         print(
             f"{KIND_LABELS[identifier_kind]}: test identifiers are "
             f"{tests['test_share'][0]:.0%} of the vocabulary in Pharo {versions[0]} and "
             f"{tests['test_share'][-1]:.0%} in Pharo {versions[-1]}; without them "
             f"Spearman rho is {trend['spearman_rho']:+.2f}"
+        )
+        print(
+            f"  share of test identifiers per release: "
+            f"{', '.join(f'{v} {s:.1%}' for v, s in zip(versions, tests['test_share']))} "
+            f"(from {min(tests['test_share']):.1%} to {max(tests['test_share']):.1%})"
+        )
+        print(
+            f"  cohesion without them per release: "
+            f"{', '.join(f'{v} {c:.4f}' for v, c in zip(versions, tests['cohesion']))} "
+            f"(highest in Pharo {versions[int(np.argmax(tests['cohesion']))]})"
         )
 
         # 5. Measurement choices.
@@ -490,6 +512,7 @@ def main() -> None:
                 "first": trend["first_value"],
                 "last": trend["last_value"],
                 "slope": trend["linear_slope"],
+                "rho": trend["spearman_rho"],
             })
 
     outputs.append(args.results_dir / "robustness_trends.tex")

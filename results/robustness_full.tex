@@ -1,28 +1,28 @@
 \begin{table}[t]
 \centering
-\caption{Pooled prefix cohesion (lengths 1--4) under the robustness analyses (green: increase, red: decrease).}
+\caption{Pooled prefix cohesion (lengths 1--4) under the robustness analyses: first and last release, change, Spearman $\rho$ with the release order, and slope per release (green: increase, red: decrease). Class names are declared once each, so counting declarations leaves their series unchanged.}
 \label{tab:robustness-full}
 \footnotesize
 \setlength{\tabcolsep}{2.5pt}
-\begin{tabular}{llrrrr}
+\begin{tabular}{llrrrrr}
 \toprule
-\headerrow Identifiers & Analysis & First & Last & Change & Slope\\
+\headerrow Identifiers & Analysis & First & Last & Change & $\rho$ & Slope\\
 \midrule
-Selectors & Whole system & 0.492 & 0.547 & \textcolor{green!50!black}{+0.055} & \textcolor{green!50!black}{+0.0034}\\
- & Equal-size samples (20,000) & 0.486 & 0.534 & \textcolor{green!50!black}{+0.048} & \textcolor{green!50!black}{+0.0027}\\
- & Persistent families (15) & 0.448 & 0.506 & \textcolor{green!50!black}{+0.058} & \textcolor{green!50!black}{+0.0045}\\
- & Without test names & 0.462 & 0.475 & \textcolor{green!50!black}{+0.012} & \textcolor{green!50!black}{+0.0007}\\
- & Case preserved & 0.502 & 0.554 & \textcolor{green!50!black}{+0.052} & \textcolor{green!50!black}{+0.0034}\\
- & Occurrence-weighted & 0.519 & 0.552 & \textcolor{green!50!black}{+0.033} & \textcolor{green!50!black}{+0.0023}\\
- & Top-1 probability & 0.611 & 0.637 & \textcolor{green!50!black}{+0.027} & \textcolor{green!50!black}{+0.0012}\\
+Selectors & Whole system & 0.492 & 0.547 & \textcolor{green!50!black}{+0.055} & +0.98 & \textcolor{green!50!black}{+0.0034}\\
+ & Equal-size samples (20,000) & 0.486 & 0.534 & \textcolor{green!50!black}{+0.048} & +0.98 & \textcolor{green!50!black}{+0.0027}\\
+ & Persistent families (15) & 0.448 & 0.506 & \textcolor{green!50!black}{+0.058} & +0.98 & \textcolor{green!50!black}{+0.0045}\\
+ & Without test names & 0.462 & 0.475 & \textcolor{green!50!black}{+0.012} & +0.44 & \textcolor{green!50!black}{+0.0007}\\
+ & Case preserved & 0.502 & 0.554 & \textcolor{green!50!black}{+0.052} & +0.98 & \textcolor{green!50!black}{+0.0034}\\
+ & Occurrence-weighted & 0.519 & 0.552 & \textcolor{green!50!black}{+0.033} & +0.97 & \textcolor{green!50!black}{+0.0023}\\
+ & Top-1 probability & 0.611 & 0.637 & \textcolor{green!50!black}{+0.027} & +0.91 & \textcolor{green!50!black}{+0.0012}\\
 \midrule
-Class names & Whole system & 0.489 & 0.452 & \textcolor{red!75!black}{$-$0.037} & \textcolor{red!75!black}{$-$0.0029}\\
- & Equal-size samples (1,500) & 0.500 & 0.466 & \textcolor{red!75!black}{$-$0.034} & \textcolor{red!75!black}{$-$0.0023}\\
- & Persistent families (14) & 0.501 & 0.506 & \textcolor{green!50!black}{+0.005} & \textcolor{green!50!black}{+0.0001}\\
- & Without test names & 0.494 & 0.459 & \textcolor{red!75!black}{$-$0.035} & \textcolor{red!75!black}{$-$0.0027}\\
- & Case preserved & 0.502 & 0.467 & \textcolor{red!75!black}{$-$0.035} & \textcolor{red!75!black}{$-$0.0029}\\
- & Occurrence-weighted & 0.489 & 0.452 & \textcolor{red!75!black}{$-$0.037} & \textcolor{red!75!black}{$-$0.0029}\\
- & Top-1 probability & 0.655 & 0.609 & \textcolor{red!75!black}{$-$0.045} & \textcolor{red!75!black}{$-$0.0037}\\
+Class names & Whole system & 0.489 & 0.452 & \textcolor{red!75!black}{$-$0.037} & $-$0.90 & \textcolor{red!75!black}{$-$0.0029}\\
+ & Equal-size samples (1,500) & 0.500 & 0.466 & \textcolor{red!75!black}{$-$0.034} & $-$0.80 & \textcolor{red!75!black}{$-$0.0023}\\
+ & Persistent families (14) & 0.501 & 0.506 & \textcolor{green!50!black}{+0.005} & +0.12 & \textcolor{green!50!black}{+0.0001}\\
+ & Without test names & 0.494 & 0.459 & \textcolor{red!75!black}{$-$0.035} & $-$0.91 & \textcolor{red!75!black}{$-$0.0027}\\
+ & Case preserved & 0.502 & 0.467 & \textcolor{red!75!black}{$-$0.035} & $-$0.91 & \textcolor{red!75!black}{$-$0.0029}\\
+ & Occurrence-weighted & 0.489 & 0.452 & \textcolor{red!75!black}{$-$0.037} & $-$0.90 & \textcolor{red!75!black}{$-$0.0029}\\
+ & Top-1 probability & 0.655 & 0.609 & \textcolor{red!75!black}{$-$0.045} & $-$0.95 & \textcolor{red!75!black}{$-$0.0037}\\
 \bottomrule
 \end{tabular}
 \end{table}
