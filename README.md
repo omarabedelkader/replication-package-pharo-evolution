@@ -23,7 +23,8 @@ Everything is written to `results/`:
 | --- | --- |
 | `naming_conventions.tex` | Table I |
 | `corpus_size.tex` | Table II (size of each release, Section IV-A) |
-| `robustness_trends.tex` | Table III (the paper shows its *Change* column for four of the analyses; this file has all of them) |
+| `robustness_trends.tex` | Table III |
+| `robustness_full.tex` | additional result: first and last values, change and slope for all the robustness analyses (Section V-A) |
 | `cohesion_decomposition.tex` | Figure 1 |
 | `vocabulary_turnover.tex` | Figure 2 |
 | `family_contributions.tex` | Figure 3 |

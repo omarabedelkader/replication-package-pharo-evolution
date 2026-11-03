@@ -16,14 +16,14 @@ from ..reporting import HEADER, write_text
 
 # (convention, applies to, status, examples), in LaTeX.
 CONVENTIONS = (
-    ("One keyword per argument", "selectors", "language syntax", r"\texttt{at:put:}"),
+    ("One keyword per argument", "selectors", "language syntax", r"\textsf{at:put:}"),
     ("Recurring behavioral forms", "selectors", r"style guide~\cite{Duca22b}",
-     r"\texttt{isEmpty}, \texttt{asString}, \texttt{printOn:}"),
-    (r"\texttt{test} prefix", "selectors", "enforced by SUnit", r"\texttt{testAdd}"),
-    (r"\texttt{Test(s)} suffix", "class names", "convention", r"\texttt{SetTest}"),
+     r"\textsf{isEmpty}, \textsf{asString}, \textsf{printOn:}"),
+    (r"\textsf{test} prefix", "selectors", "enforced by SUnit", r"\textsf{testAdd}"),
+    (r"\textsf{Test(s)} suffix", "class names", "convention", r"\textsf{SetTest}"),
     ("Project prefix", "class names", "convention (global namespace)",
-     r"\texttt{OBBrowser}, \texttt{ClyBrowser}"),
-    (r"\texttt{Family-Part}", "package names", "convention", r"\texttt{Kernel-Objects}"),
+     r"\textsf{OBBrowser}, \textsf{ClyBrowser}"),
+    (r"\textsf{Family-Part}", "package names", "convention", r"\textsf{Kernel-Objects}"),
 )
 
 

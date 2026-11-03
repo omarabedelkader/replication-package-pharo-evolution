@@ -268,12 +268,46 @@ def print_prefix_lengths(positions: list[int], series: dict) -> None:
             )
 
 
+# Analyses shown in the paper's table, in its order (the labels of some rows
+# carry a sample size in parentheses, so they are matched on their start).
+PAPER_ANALYSES = ("Whole system", "Equal-size samples", "Without test names", "Persistent families")
+
+
+def write_paper_robustness_table(path: Path, rows: list[dict]) -> None:
+    """The table of the paper: the change between the first and the last
+    release, for four of the analyses, selectors and class names side by side."""
+    def change(identifier_kind: str, analysis: str) -> str:
+        matches = [
+            row for row in rows
+            if row["identifier_kind"] == identifier_kind and row["analysis"].startswith(analysis)
+        ]
+        if len(matches) != 1:
+            raise ValueError(f"Expected one {analysis!r} row for {identifier_kind}, found {len(matches)}.")
+        return signed(matches[0]["last"] - matches[0]["first"], 3)
+
+    lines = [
+        r"\begin{table}[t]",
+        r"\centering",
+        r"\caption{Change in prefix cohesion between \ph 1.0 and 14 under different conditions.}",
+        r"\label{tab:robustness}",
+        r"\footnotesize",
+        r"\begin{tabular}{lrr}",
+        r"\toprule",
+        HEADER + r"Analysis & Selectors & Class names\\",
+        r"\midrule",
+    ]
+    for analysis in PAPER_ANALYSES:
+        lines.append(f"{analysis} & {change('method', analysis)} & {change('class', analysis)}\\\\")
+    lines.extend([r"\bottomrule", r"\end{tabular}", r"\end{table}"])
+    write_text(path, lines)
+
+
 def write_robustness_table(path: Path, rows: list[dict]) -> None:
     lines = [
         r"\begin{table}[t]",
         r"\centering",
         r"\caption{Pooled prefix cohesion (lengths 1--4) under the robustness analyses (green: increase, red: decrease).}",
-        r"\label{tab:robustness}",
+        r"\label{tab:robustness-full}",
         r"\footnotesize",
         r"\setlength{\tabcolsep}{2.5pt}",
         r"\begin{tabular}{llrrrr}",
@@ -459,6 +493,8 @@ def main() -> None:
             })
 
     outputs.append(args.results_dir / "robustness_trends.tex")
+    write_paper_robustness_table(outputs[-1], rows)
+    outputs.append(args.results_dir / "robustness_full.tex")
     write_robustness_table(outputs[-1], rows)
     outputs.append(args.results_dir / "cohesion_decomposition.tex")
     write_decomposition_figure(
