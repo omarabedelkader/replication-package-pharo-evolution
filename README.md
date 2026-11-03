@@ -15,6 +15,10 @@ connection for the first run (about 400 MB of downloads, kept in
 
 `./run.sh --skip-download` reuses the corpus in `results/corpus/`.
 
+The terminal shows only the steps. Everything the scripts print, including
+every number quoted in the paper under the section it belongs to, is written
+to `run.log`.
+
 ## Output
 
 Everything is written to `results/`:
@@ -24,7 +28,7 @@ Everything is written to `results/`:
 | `naming_conventions.tex` | Table I |
 | `corpus_size.tex` | Table II (size of each release, Section IV-A) |
 | `robustness_trends.tex` | Table III |
-| `robustness_full.tex` | additional result: first and last values, change, Spearman rho and slope for all the robustness analyses (Section V-A); the trend at each prefix length is in `numbers.txt` |
+| `robustness_full.tex` | additional result: first and last values, change, Spearman rho and slope for all the robustness analyses (Section V-A); the trend at each prefix length is in `run.log` |
 | `cohesion_decomposition.tex` | Figure 1 |
 | `vocabulary_turnover.tex` | Figure 2 |
 | `family_contributions.tex` | Figure 3 |
@@ -32,7 +36,6 @@ Everything is written to `results/`:
 | `ccp_prefix_cohesion.tex` | Figure 5 |
 | `frequent_prefixes.tex` | additional result: most frequent prefixes (Section V-A) |
 | `ccp_family_ranks.tex` | additional result: family rankings over time (Section V-D) |
-| `numbers.txt` | every number quoted in the text, under the section it belongs to |
 | `corpus/` | the extracted classes and methods, one file per release |
 
 Tables and figures are LaTeX files (figures are PGF code); include them
