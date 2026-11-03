@@ -9,8 +9,9 @@ import argparse
 from pathlib import Path
 
 from ..corpus import IdentifierRecord, read_corpus
-from ..paths import CORPUS_DIR
+from ..paths import CORPUS_DIR, RESULTS_DIR
 from ..releases import find_release, release_index
+from ..reporting import HEADER, write_text
 from ..vocabulary import identifiers, package_family
 
 
@@ -47,9 +48,43 @@ def print_table(rows: list[dict]) -> None:
         )
 
 
+TABLE_COLUMNS = ("packages", "class_declarations", "method_declarations", "unique_selectors")
+
+
+def write_corpus_table(path: Path, rows: list[dict]) -> None:
+    """Write the corpus size table: packages, classes, methods and unique
+    selectors per release, in two halves side by side to fit one column."""
+    half = (len(rows) + 1) // 2
+    header = "Rel. & Pack. & Class. & Meth. & Sel."
+
+    def cells(row: dict | None) -> str:
+        if row is None:
+            return " & ".join([""] * (len(TABLE_COLUMNS) + 1))
+        return " & ".join([row["version"]] + [f"{row[column]:,}" for column in TABLE_COLUMNS])
+
+    lines = [
+        r"\begin{table}[t]",
+        r"\centering",
+        r"\caption{Size of the eighteen \ph snapshots.}",
+        r"\label{tab:corpus}",
+        r"\scriptsize",
+        r"\setlength{\tabcolsep}{2.5pt}",
+        r"\begin{tabular}{lrrrr|lrrrr}",
+        r"\toprule",
+        HEADER + header + " & " + header + r"\\",
+        r"\midrule",
+    ]
+    for index in range(half):
+        right = rows[index + half] if index + half < len(rows) else None
+        lines.append(cells(rows[index]) + " & " + cells(right) + r"\\")
+    lines += [r"\bottomrule", r"\end{tabular}", r"\end{table}"]
+    write_text(path, lines)
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--corpus-dir", type=Path, default=CORPUS_DIR)
+    parser.add_argument("--results-dir", type=Path, default=RESULTS_DIR)
     args = parser.parse_args()
 
     rows = [
@@ -58,6 +93,10 @@ def main() -> None:
     ]
 
     print_table(rows)
+
+    output = args.results_dir / "corpus_size.tex"
+    write_corpus_table(output, rows)
+    print(f"Saved {output}")
 
 
 if __name__ == "__main__":

@@ -88,7 +88,7 @@ if [[ "$BUILD_CORPUS" -eq 1 ]]; then
 fi
 
 step "Corpus validation";                             run pharo_naming.analysis.validate_corpus
-step "Section IV: corpus size";                      run pharo_naming.analysis.corpus_statistics
+step "Section IV: Table II (corpus size)";          run pharo_naming.analysis.corpus_statistics
 step "Table I: naming conventions";                  run pharo_naming.analysis.naming_conventions
 step "RQ1: whole-system prefix cohesion";            run pharo_naming.analysis.global_analysis
 step "RQ1: Table II and Figure 2 (prefixes, turnover)"; run pharo_naming.analysis.turnover_analysis
