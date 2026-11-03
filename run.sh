@@ -70,8 +70,9 @@ export PYTHONDONTWRITEBYTECODE=1
 mkdir -p "$MPLCONFIGDIR"
 
 # Runs one module; its output goes to the terminal and to results/numbers.txt.
+# Paths are printed relative to the package, so the output names no local folder.
 run() {
-    "$PYTHON_BIN" -m "$@" 2>&1 | tee -a "$NUMBERS"
+    "$PYTHON_BIN" -m "$@" 2>&1 | sed "s|$ROOT_DIR/||g" | tee -a "$NUMBERS"
 }
 
 if [[ "$RUN_TESTS" -eq 1 ]]; then

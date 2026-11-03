@@ -22,14 +22,14 @@ Everything is written to `results/`:
 | File | In the paper |
 | --- | --- |
 | `naming_conventions.tex` | Table I |
-| `frequent_prefixes.tex` | Table II |
-| `robustness_trends.tex` | Table III |
+| `robustness_trends.tex` | Table II (the paper shows its *Change* column for four of the analyses; this file has all of them) |
 | `cohesion_decomposition.tex` | Figure 1 |
 | `vocabulary_turnover.tex` | Figure 2 |
 | `family_contributions.tex` | Figure 3 |
 | `ccp_correlations.tex` | Figure 4 |
 | `ccp_prefix_cohesion.tex` | Figure 5 |
-| `ccp_family_ranks.tex` | Figure 6 |
+| `frequent_prefixes.tex` | additional result: most frequent prefixes (Section V-A) |
+| `ccp_family_ranks.tex` | additional result: family rankings over time (Section V-D) |
 | `numbers.txt` | every number quoted in the text, under the section it belongs to |
 | `corpus/` | the extracted classes and methods, one file per release |
 
