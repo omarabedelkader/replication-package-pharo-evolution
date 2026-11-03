@@ -88,21 +88,24 @@ if [[ "$RUN_TESTS" -eq 1 ]]; then
 fi
 
 if [[ "$BUILD_CORPUS" -eq 1 ]]; then
-    step "Corpus: downloading the releases and extracting their declarations"
+    step "Corpus: results/corpus/ (download and extraction of the 18 releases)"
     run pharo_naming.extraction.build_corpus
-    step "Section IV: check of the image reader on Pharo 2"
+    step "Check of the image reader on Pharo 2"
     run pharo_naming.analysis.validate_image_reader
 fi
 
-step "Corpus validation";                             run pharo_naming.analysis.validate_corpus
-step "Section IV: Table II (corpus size)";          run pharo_naming.analysis.corpus_statistics
-step "Table I: naming conventions";                  run pharo_naming.analysis.naming_conventions
-step "RQ1: whole-system prefix cohesion";            run pharo_naming.analysis.global_analysis
-step "RQ1: Figure 2 and frequent prefixes (turnover)"; run pharo_naming.analysis.turnover_analysis
-step "RQ2: package families";                        run pharo_naming.analysis.package_family_analysis
-step "RQ1 and RQ3: Table III and Figure 1";          run pharo_naming.analysis.robustness_analysis
-step "RQ3: Figure 3 (family contributions)";         run pharo_naming.analysis.family_contribution_analysis
-step "RQ4: Figures 4 and 5 (conceptual cohesion)";   run pharo_naming.analysis.conceptual_cohesion_analysis
-step "RQ4: similarity between families";             run pharo_naming.analysis.family_similarity_analysis
+step "Check of the corpus";                                         run pharo_naming.analysis.validate_corpus
+step "Table I: results/naming_conventions.tex";                     run pharo_naming.analysis.naming_conventions
+step "Table II: results/corpus_size.tex";                           run pharo_naming.analysis.corpus_statistics
+step "Whole-system prefix cohesion (numbers in run.log)";           run pharo_naming.analysis.global_analysis
+step "Figure 2: results/vocabulary_turnover.tex, results/frequent_prefixes.tex"
+run pharo_naming.analysis.turnover_analysis
+step "Package families (numbers in run.log)";                       run pharo_naming.analysis.package_family_analysis
+step "Table III and Figure 1: results/robustness_trends.tex, results/cohesion_decomposition.tex, results/robustness_full.tex"
+run pharo_naming.analysis.robustness_analysis
+step "Figure 3: results/family_contributions.tex";                  run pharo_naming.analysis.family_contribution_analysis
+step "Figures 4 and 5: results/ccp_correlations.tex, results/ccp_prefix_cohesion.tex, results/ccp_family_ranks.tex"
+run pharo_naming.analysis.conceptual_cohesion_analysis
+step "Similarity between families (numbers in run.log)";            run pharo_naming.analysis.family_similarity_analysis
 
 step "Done: tables and figures in results/, log in run.log"
