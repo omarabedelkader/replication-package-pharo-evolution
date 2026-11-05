@@ -289,7 +289,7 @@ def write_paper_robustness_table(path: Path, rows: list[dict]) -> None:
     lines = [
         r"\begin{table}[t]",
         r"\centering",
-        r"\caption{Change in prefix cohesion between \ph 1.0 and 14 under different conditions.}",
+        r"\caption{Change in prefix cohesion between \ph 1.0 and 14}",
         r"\label{tab:robustness}",
         r"\footnotesize",
         r"\begin{tabular}{lrr}",
