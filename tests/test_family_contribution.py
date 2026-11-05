@@ -13,7 +13,7 @@ def test_a_family_that_leaves_carries_the_whole_change():
     corpus = {
         "1.0": [klass("1.0", "Fruit-Core", name) for name in stable]
         + [klass("1.0", "OB-Core", name) for name in ("OBA", "OBB", "OBC", "OBD")],
-        "1.1": [klass("1.1", "Fruit-Core", name) for name in stable],
+        "2": [klass("2", "Fruit-Core", name) for name in stable],
     }
 
     result = contributions(corpus, "class")

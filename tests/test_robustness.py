@@ -48,7 +48,7 @@ def test_coded_cohesion_of_a_sample_matches_the_reference_implementation():
 def test_resampling_is_reproducible_and_bounded():
     corpus = {
         "1.0": [method("1.0", "Kernel", name) for name in VOCABULARY],
-        "1.1": [method("1.1", "Kernel", name) for name in VOCABULARY[:12]],
+        "2": [method("2", "Kernel", name) for name in VOCABULARY[:12]],
     }
     first = size_controlled_samples(corpus, "method", 8, repetitions=5, seed=1)
     second = size_controlled_samples(corpus, "method", 8, repetitions=5, seed=1)
@@ -72,7 +72,7 @@ def test_slopes_are_least_squares_slopes():
 def test_only_families_present_in_every_release_are_persistent():
     corpus = {
         "1.0": [method("1.0", "Kernel-Objects", "abc"), method("1.0", "Old-Core", "xyz")],
-        "1.1": [method("1.1", "Kernel-Classes", "abd"), method("1.1", "New-Core", "xyw")],
+        "2": [method("2", "Kernel-Classes", "abd"), method("2", "New-Core", "xyw")],
     }
 
     assert persistent_families(corpus, "method") == {"Kernel"}

@@ -2,7 +2,7 @@
 
     python -m pharo_naming.analysis.validate_image_reader
 
-Pharo 1.0 to 1.4 exist only as binary images, read by ``extraction/image.py``.
+Pharo 1.0 exists only as a binary image, read by ``extraction/image.py``.
 To check that reader, it is applied to the Pharo 2 image whose update number
 (20628) is the last one of the Pharo 2 FileTree export used for the corpus:
 every method of the export must be found in the image.

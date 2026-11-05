@@ -6,7 +6,7 @@ correlations in the same table as the family-level ones.
 RQ4 compares CCP and prefix cohesion over the families of each release.  This
 step asks the same question at the level of the whole system: the system CCP
 of a release is the mean similarity of all its pairs of classes (the random
-baseline of the family analysis), and it is correlated, over the eighteen
+baseline of the family analysis), and it is correlated, over the fourteen
 releases, with the whole-system prefix cohesion of class names and selectors.
 
 The releases form one ordered sequence, so two series that both drift with

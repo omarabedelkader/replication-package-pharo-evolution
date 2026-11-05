@@ -7,9 +7,8 @@ published state, which is the only state available for all of them.
 Three kinds of artifact are needed because Pharo changed how it is published:
 
 ``image``
-    Pharo 1.0 to 1.4.  Only binary images exist; all five share the same
-    ``PharoV10.sources`` file, so the image is the sole description of what
-    each release contains.  The image is decoded directly.
+    Pharo 1.0.  Only a binary image exists, so the image is the sole
+    description of what the release contains.  The image is decoded directly.
 ``filetree``
     Pharo 2 to 6.  The official FileTree mirror ``pharo-project/pharo-core``.
 ``tonel``
@@ -37,7 +36,7 @@ EXPORTER_PACKAGES = frozenset({
 
 @dataclass(frozen=True)
 class Release:
-    label: str  # "1.0", "1.4", "2", "14"
+    label: str  # "1.0", "2", "14"
     kind: str  # "image", "filetree" or "tonel"
     url: str
     archive: str  # file name used in the download cache
@@ -88,10 +87,6 @@ def _tonel(label: str, commit: str, branch: str) -> Release:
 
 RELEASES: tuple[Release, ...] = (
     _image("1.0", "10/10517", "578dc23ea12b2c5c4b32521e0c8538edfcaca24e057a9e7f3cd7fe8d864833ff", "Pharo 1.0 (build 10517), full image"),
-    _image("1.1", "11/11414", "bc290487911a8dc80ad9b01badd4dba56e2d2b54ace09d9e91b2523b517af366", "Pharo 1.1.1 (build 11414), full image"),
-    _image("1.2", "12/12353", "cd6088e85a5a0acacced3f2d2e499fbdeaa7e1947d50a33b5aa82af383ae9d17", "PharoCore 1.2.2 (build 12353), core image only"),
-    _image("1.3", "13/13328", "76b93c7c35e1d6f0bbb18343e2967ddf8017ab93878b6f3fae39839a43976a77", "Pharo 1.3 (build 13328), full image"),
-    _image("1.4", "14/14459", "469cb52af18a274da5de0a54a66c10d7e63915893bec196c3266c33fea7d89f2", "Pharo 1.4 (build 14459), full image"),
     _filetree("2", "28cc87dd94fa3e8fef6278635a3f9abc0904869e"),
     _filetree("3", "18c33b2573dbb03c9826acfa5d04edcc63540ab7"),
     _filetree("4", "e5c8e4d89ca795062fdab1f50f6e7cd6ac692099"),

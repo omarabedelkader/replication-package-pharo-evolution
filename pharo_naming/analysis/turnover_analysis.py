@@ -72,52 +72,64 @@ SEGMENTS = (
 )
 
 
-def write_turnover_figure(path: Path, versions: list[str], results: dict[str, dict]) -> None:
-    """For each vocabulary, one bar per release: the first release split into
-    names kept and removed, the last one into names kept and added.
+# Vertical position of the group brackets, in axes fraction (below the release labels).
+BRACKET_Y = -0.1
 
-    Lengths are relative to the size of the first release, so both vocabularies
-    share one axis and their turnover can be compared directly; the labels
-    give the shares and the total counts.  A band links the names kept by both releases."""
+
+def write_turnover_figure(path: Path, versions: list[str], results: dict[str, dict]) -> None:
+    """For each vocabulary and each of the first and last releases, one column
+    per part of the vocabulary: names kept (in the same family or another one),
+    and names removed (first release) or added (last release).
+
+    Both vocabularies share one logarithmic axis in numbers of names, so that
+    the small class-name counts stay readable next to the selector counts.  The
+    columns are not stacked, since stacked lengths are meaningless on a log scale."""
     plt = pyplot()
     first, last = versions[0], versions[-1]
-    fig, axes = plt.subplots(2, 1, figsize=(COLUMN_WIDTH, 2.25), sharex=True, constrained_layout=True)
+    fig, ax = plt.subplots(figsize=(COLUMN_WIDTH, 2.6), constrained_layout=True)
     styles = {key: (color, text_color) for key, _, color, text_color in SEGMENTS}
-    bars = {0: ("same", "relocated", "removed"), 1: ("same", "relocated", "added")}
-    height = 0.56
-    for ax, kind in zip(axes, ("method", "class")):
-        result = results[kind]
-        overall = result["overall"]
+    columns = {0: ("same", "relocated", "removed"), 1: ("same", "relocated", "added")}
+    width, step = 0.8, 1.0  # column width and distance between two columns
+    floor = 100  # start of the logarithmic axis
+    labels, ticks, position = [], [], 0.0
+    below = ax.get_xaxis_transform()  # x in data, y in axes fraction
+    for kind in ("method", "class"):
+        overall = results[kind]["overall"]
         counts = {
             "same": overall["kept"] - overall["relocated"],
             "relocated": overall["relocated"],
             "removed": overall["removed"],
             "added": overall["added"],
         }
-        scale = 100 / result["first"]
-        kept = overall["kept"] * scale
-        ax.fill_between([0, kept], 0 + height / 2, 1 - height / 2, color=GRID, alpha=0.6, linewidth=0)
-        for position, keys in bars.items():
-            left = 0.0
+        group_left = position
+        for offset, keys in columns.items():
+            release_left = position
             for key in keys:
-                width = counts[key] * scale
                 color, text_color = styles[key]
-                ax.barh(position, width, left=left, height=height, color=color,
-                        edgecolor="white", linewidth=0.8)
-                ax.text(left + width / 2, position, f"{width:.0f}", ha="center", va="center",
-                        fontsize=6, color=text_color)
-                left += width
-            total = result["first"] if position == 0 else result["last"]
-            ax.text(left + 3, position, f"{total:,} names", ha="left", va="center", fontsize=6, color=INK)
-        ax.axvline(100, color=MUTED, linewidth=0.6, linestyle=(0, (2, 2)), zorder=0)
-        ax.set_yticks([0, 1], [f"Pharo {first}", f"Pharo {last}"], fontsize=6.5)
-        ax.set_ylim(1.5, -0.5)
-        ax.tick_params(axis="y", length=0)
-        ax.spines["left"].set_visible(False)
-        ax.set_title(KIND_LABELS[kind], loc="left", fontsize=7, pad=2)
-    axes[-1].set_xlim(0, 300)
-    axes[-1].set_xticks([0, 50, 100, 150, 200, 250], ["0", "50", "100", "150", "200", "250"])
-    axes[-1].set_xlabel(f"Names, in % of the Pharo {first} vocabulary", fontsize=7)
+                ax.bar(position, counts[key] - floor, bottom=floor, width=width, color=color,
+                       edgecolor="white", linewidth=0.6)
+                ax.text(position, counts[key] / 1.12, f"{counts[key]:,}", ha="center", va="top",
+                        rotation=90, fontsize=5.5, color=text_color)
+                position += step
+            ticks.append((release_left + position - step) / 2)
+            labels.append(f"Pharo {first if offset == 0 else last}")
+            position += 0.5 * step
+        # Group label under a bracket spanning its columns.
+        left, right = group_left - width / 2, position - 1.5 * step + width / 2
+        ax.plot([left, left, right, right], [BRACKET_Y + 0.025, BRACKET_Y, BRACKET_Y, BRACKET_Y + 0.025],
+                transform=below, color=INK, linewidth=0.7, clip_on=False)
+        ax.text((left + right) / 2, BRACKET_Y - 0.03, KIND_LABELS[kind], transform=below,
+                ha="center", va="top", fontsize=7, color=INK)
+        position += 0.7 * step
+    ax.set_yscale("log")
+    ax.set_ylim(floor, 60_000)
+    ax.set_yticks([100, 1_000, 10_000], ["100", "1,000", "10,000"])
+    ax.set_xticks(ticks, labels, fontsize=6.5)
+    ax.set_xlim(-0.6, position - 1.2 * step + 0.6)
+    ax.tick_params(axis="x", length=0)
+    ax.tick_params(axis="y", labelsize=6)
+    ax.spines["bottom"].set_visible(False)
+    ax.set_ylabel("Number of names (log scale)", fontsize=7)
     handles = [plt.Rectangle((0, 0), 1, 1, color=color) for _, _, color, _ in SEGMENTS]
     fig.legend(handles, [label for _, label, _, _ in SEGMENTS], loc="outside upper center",
                ncols=4, frameon=False, fontsize=6.5, handlelength=1.2, columnspacing=1.0)

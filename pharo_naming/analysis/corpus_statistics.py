@@ -65,7 +65,7 @@ def write_corpus_table(path: Path, rows: list[dict]) -> None:
     lines = [
         r"\begin{table}[t]",
         r"\centering",
-        r"\caption{Size of the eighteen \ph snapshots.}",
+        r"\caption{Size of the fourteen \ph snapshots.}",
         r"\label{tab:corpus}",
         r"\scriptsize",
         r"\setlength{\tabcolsep}{2.5pt}",

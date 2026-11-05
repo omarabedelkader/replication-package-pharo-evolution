@@ -1,7 +1,7 @@
 # Replication package: the evolution of identifier names in Pharo
 
 This package reproduces every table, figure and number of the paper
-from the 18 Pharo releases (1.0 to 1.4, and 2 to 14).
+from the 14 Pharo releases (1.0, and 2 to 14).
 
 ## Run
 
@@ -46,7 +46,7 @@ with `\input{results/...}`.
 | Path | Role |
 | --- | --- |
 | `run.sh` | the single entry point |
-| `pharo_naming/releases.py` | the 18 releases, each pinned to a checksum or a Git commit |
+| `pharo_naming/releases.py` | the 14 releases, each pinned to a checksum or a Git commit |
 | `pharo_naming/extraction/` | download and the three readers (image, FileTree, Tonel) |
 | `pharo_naming/analysis/` | one module per step of `run.sh` |
 | `tests/` | unit tests, run by `run.sh` |

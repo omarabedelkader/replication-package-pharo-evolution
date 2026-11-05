@@ -4,7 +4,7 @@
 #
 #   1. creates a Python environment (.venv) with the pinned dependencies;
 #   2. runs the unit tests;
-#   3. downloads the 18 Pharo releases (cached in .cache) and extracts
+#   3. downloads the 14 Pharo releases (cached in .cache) and extracts
 #      their classes and methods into results/corpus;
 #   4. writes the tables and figures of the paper to results/ as .tex files.
 #
@@ -88,7 +88,7 @@ if [[ "$RUN_TESTS" -eq 1 ]]; then
 fi
 
 if [[ "$BUILD_CORPUS" -eq 1 ]]; then
-    step "Corpus: results/corpus/ (download and extraction of the 18 releases)"
+    step "Corpus: results/corpus/ (download and extraction of the 14 releases)"
     run pharo_naming.extraction.build_corpus
     step "Check of the image reader on Pharo 2"
     run pharo_naming.analysis.validate_image_reader

@@ -85,7 +85,7 @@ def test_pooled_row_combines_prefix_lengths_one_to_four():
 def test_family_threshold_counts_distinct_identifiers_over_all_releases():
     corpus = {
         "1.0": [method("1.0", "Tiny-Core", "A", f"selector{i}") for i in range(12)],
-        "1.1": [method("1.1", "Tiny-Core", "A", f"selector{i}") for i in range(6, 18)],
+        "2": [method("2", "Tiny-Core", "A", f"selector{i}") for i in range(6, 18)],
     }
     grouped = group_by_family(corpus)
 
@@ -96,12 +96,12 @@ def test_family_threshold_counts_distinct_identifiers_over_all_releases():
 def test_absent_family_produces_no_row():
     corpus = {
         "1.0": [method("1.0", "Big-Core", "A", f"selector{i}") for i in range(30)],
-        "1.1": [method("1.1", "Other-Core", "A", f"message{i}") for i in range(30)],
+        "2": [method("2", "Other-Core", "A", f"message{i}") for i in range(30)],
     }
     metric_rows, summary_rows = analyze_package_families(corpus)
 
     observed = {(row["package_family"], row["version"]) for row in metric_rows}
-    assert observed == {("Big", "1.0"), ("Other", "1.1")}
+    assert observed == {("Big", "1.0"), ("Other", "2")}
     assert {row["versions_observed"] for row in summary_rows} == {1}
 
 

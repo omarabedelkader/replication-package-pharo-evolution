@@ -1,6 +1,6 @@
 """Build the declaration corpus: one file per Pharo release.
 
-    python -m pharo_naming.extraction.build_corpus [--releases 1.0 1.1 ...]
+    python -m pharo_naming.extraction.build_corpus [--releases 1.0 2 ...]
 
 Each release is downloaded once into the cache, read with the extractor that
 matches its artifact, and written as sorted, de-duplicated JSON Lines.  The

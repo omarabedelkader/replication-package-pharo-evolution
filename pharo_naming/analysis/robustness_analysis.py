@@ -50,7 +50,7 @@ KIND_LABELS = {
 PANEL_TITLES = {"method": "Method selectors", "class": "Class names"}
 
 # Size-controlled resampling.  Each sample size is below the smallest release
-# vocabulary of its kind (24,560 selectors and 1,989 class names, Pharo 1.2).
+# vocabulary of its kind (28,888 selectors and 2,982 class names, Pharo 1.0).
 SAMPLE_SIZES = {"method": 20_000, "class": 1_500}
 REPETITIONS = 500
 SEED = 2027
@@ -339,7 +339,7 @@ def write_robustness_table(path: Path, rows: list[dict]) -> None:
 # Events of the history that the decomposition figure points at:
 # (identifier kind, release after the event, label, side of the line).
 EVENTS = (
-    ("class", "2", "OmniBrowser\n(OB) leaves", "left"),
+    ("class", "2", "OmniBrowser\n(OB) leaves", "right"),
     ("class", "8", "Spec 2, Calypso, Clap,\nand others enter", "right"),
 )
 
@@ -354,7 +354,7 @@ def write_decomposition_figure(
     series that removes its driver (test selectors; families that come and go).
 
     Both panels share the y scale, so the two trends are compared at the same
-    magnitude.
+    magnitude; both panels show its tick labels.
     """
     plt = pyplot()
     fig, axes = plt.subplots(1, 2, figsize=(TEXT_WIDTH, 2.25), sharey=True, constrained_layout=True)
@@ -386,9 +386,12 @@ def write_decomposition_figure(
                         ha="left" if side == "right" else "right", va="top", fontsize=6.5,
                         color=MUTED)
 
-    axes[0].annotate("test selectors", xy=(13, (whole["method"][13] + decomposed["method"][1][13]) / 2),
+    middle = versions.index("10")
+    axes[0].annotate("test selectors", xy=(middle, (whole["method"][middle] + decomposed["method"][1][middle]) / 2),
                      ha="center", va="center", fontsize=6.5, color=INK, style="italic")
     axes[0].set_ylabel("Prefix cohesion")
+    # Shared scale, but each panel keeps its own tick labels.
+    axes[1].tick_params(axis="y", labelleft=True)
     save_figure(fig, path)
     plt.close(fig)
 
