@@ -26,12 +26,12 @@ import numpy as np
 from ..corpus import IdentifierRecord, read_corpus
 from ..paths import CORPUS_DIR, RESULTS_DIR
 from ..releases import release_index
-from ..plotting import BLUE, COLUMN_WIDTH, INK, MUTED, ORANGE, pyplot, save_figure
+from ..plotting import GREEN, INK, MUTED, PURPLE, FIGURE_HEIGHT, TEXT_WIDTH, pyplot, save_figure
 from ..vocabulary import IDENTIFIER_KINDS, PRIMARY_WEIGHTING, identifiers, package_family
 from .robustness_analysis import encode_vocabulary, pooled_cohesion, slopes
 
 
-KIND_LABELS = {"method": "Selectors", "class": "Class names"}
+KIND_LABELS = {"method": "Method selectors", "class": "Class names"}
 EN_DASH = "\u2013"
 
 # Families shown in the figure: those that push the whole-system series most
@@ -139,31 +139,32 @@ def selected_families(result: dict, identifier_kind: str) -> list[dict]:
 def write_contribution_figure(path: Path, versions: list[str], results: dict[str, dict]) -> None:
     """Diverging bars: the share of the slope of each trend due to one family.
 
-    A positive share pushes the series in the direction of its trend (blue), a
-    negative one against it (orange); the bars therefore also differ by side.
+    A positive share pushes the series in the direction of its trend (green), a
+    negative one against it (purple); the bars therefore also differ by side.
     """
     plt = pyplot()
-    kinds = ("class", "method")
+    # Same order as Figures 1 and 3: method selectors left, class names right.
+    kinds = ("method", "class")
     counts = [len(selected_families(results[kind], kind)) for kind in kinds]
-    fig, axes = plt.subplots(
-        2, 1, figsize=(COLUMN_WIDTH, 3.2), sharex=True, constrained_layout=True,
-        gridspec_kw={"height_ratios": counts},
-    )
+    # Full text width, the two panels side by side like Figure 1; the shorter
+    # panel is padded so that bars have the same height in both.
+    fig, axes = plt.subplots(1, 2, figsize=(TEXT_WIDTH, FIGURE_HEIGHT), sharex=True, constrained_layout=True)
 
     for ax, identifier_kind in zip(axes, kinds):
         result = results[identifier_kind]
         rows = selected_families(result, identifier_kind)
         shares = np.array([100 * row["slope_share"] for row in rows])
         positions = np.arange(len(rows))
-        colors = [BLUE if share > 0 else ORANGE for share in shares]
+        colors = [GREEN if share > 0 else PURPLE for share in shares]
         ax.barh(positions, shares, height=0.62, color=colors, edgecolor="white", linewidth=0.5)
         ax.axvline(0, color=MUTED, linewidth=0.6)
         ax.set_yticks(
             positions,
-            [f"{row['family']}  ({_presence_label(row['present'], versions).replace('--', EN_DASH)})"
+            [f"{row['family']}  ({_presence_label(row['present'], versions).replace('--', EN_DASH).replace('1.0', '1')})"
              for row in rows],
-            fontsize=6.5,
+            fontsize=7,
         )
+        ax.set_ylim(-0.6, max(counts) - 0.4)
         ax.invert_yaxis()
         ax.tick_params(axis="y", length=0)
         ax.spines["left"].set_visible(False)
@@ -171,18 +172,19 @@ def write_contribution_figure(path: Path, versions: list[str], results: dict[str
             ax.annotate(
                 f"{share:+.0f}%".replace("-", "\u2212"), xy=(share, position),
                 xytext=(3 if share > 0 else -3, 0), textcoords="offset points",
-                ha="left" if share > 0 else "right", va="center", fontsize=6, color=INK,
+                ha="left" if share > 0 else "right", va="center", fontsize=6.5, color=INK,
             )
-        ax.set_title(KIND_LABELS[identifier_kind], loc="left", fontsize=7)
+        ax.set_title(KIND_LABELS[identifier_kind], loc="left")
         ax.grid(True, axis="x")
         ax.set_axisbelow(True)
 
     limit = max(abs(100 * row["slope_share"]) for kind in kinds for row in selected_families(results[kind], kind))
     axes[-1].set_xlim(-limit * 1.45, limit * 1.45)
-    axes[-1].set_xlabel("Share of the slope due to the family (%)")
-    handles = [plt.Rectangle((0, 0), 1, 1, color=BLUE), plt.Rectangle((0, 0), 1, 1, color=ORANGE)]
-    fig.legend(handles, ["pushes with the trend", "pushes against it"], loc="outside upper center",
-               ncols=2, frameon=False, fontsize=6.5, handlelength=1.2)
+    for ax in axes:
+        ax.set_xlabel("Share of the slope due to the family (%)")
+    handles = [plt.Rectangle((0, 0), 1, 1, color=GREEN), plt.Rectangle((0, 0), 1, 1, color=PURPLE)]
+    fig.legend(handles, ["Strengthens the trend", "Weakens the trend"], loc="outside upper center",
+               ncols=2, frameon=False, fontsize=7, handlelength=1.2)
     save_figure(fig, path)
     plt.close(fig)
 

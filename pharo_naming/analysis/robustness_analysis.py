@@ -26,7 +26,7 @@ import numpy as np
 
 from ..corpus import IdentifierRecord, read_corpus
 from ..paths import CORPUS_DIR, RESULTS_DIR
-from ..plotting import BLUE, INK, MUTED, ORANGE, TEXT_WIDTH, pyplot, save_figure, version_axis
+from ..plotting import BLUE, FIGURE_HEIGHT, INK, MUTED, ORANGE, TEXT_WIDTH, pyplot, save_figure, version_axis
 from ..releases import release_index
 from ..reporting import HEADER, fmt, signed, write_text
 from ..vocabulary import (
@@ -48,6 +48,7 @@ KIND_LABELS = {
     "method_without_tests": "Selectors without test names",
 }
 PANEL_TITLES = {"method": "Method selectors", "class": "Class names"}
+WHOLE_LABELS = {"method": "All method\nselectors", "class": "All class\nnames"}
 
 # Size-controlled resampling.  Each sample size is below the smallest release
 # vocabulary of its kind (28,888 selectors and 2,982 class names, Pharo 1.0).
@@ -293,7 +294,7 @@ def write_paper_robustness_table(path: Path, rows: list[dict]) -> None:
         r"\footnotesize",
         r"\begin{tabular}{lrr}",
         r"\toprule",
-        HEADER + r"Analysis & Selectors & Class names\\",
+        HEADER + r"Analysis & Method selectors & Class names\\",
         r"\midrule",
     ]
     for analysis in PAPER_ANALYSES:
@@ -357,7 +358,7 @@ def write_decomposition_figure(
     magnitude; both panels show its tick labels.
     """
     plt = pyplot()
-    fig, axes = plt.subplots(1, 2, figsize=(TEXT_WIDTH, 2.25), sharey=True, constrained_layout=True)
+    fig, axes = plt.subplots(1, 2, figsize=(TEXT_WIDTH, FIGURE_HEIGHT), sharey=True, constrained_layout=True)
     positions = np.arange(len(versions))
     colors = {"method": BLUE, "class": ORANGE}
 
@@ -366,14 +367,18 @@ def write_decomposition_figure(
         overall = whole[identifier_kind]
         color = colors[identifier_kind]
         ax.fill_between(positions, overall, values, color=color, alpha=0.12, linewidth=0)
-        ax.plot(positions, overall, color=INK, marker="o", markersize=2.5)
-        ax.plot(positions, values, color=color, linestyle="--", marker="s", markersize=2.5)
+        # The controlled series is the result; the whole-system one is the
+        # reference it is compared with, so it is drawn lighter.
+        ax.plot(positions, overall, color=MUTED, marker="o", markersize=2.5, linewidth=1.0)
+        ax.plot(positions, values, color=color, marker="s", markersize=3, linewidth=1.8)
         ax.set_title(PANEL_TITLES[identifier_kind], loc="left")
-        version_axis(ax, versions, rotation=90)
+        # The paper calls the first release Pharo 1, not 1.0.
+        version_axis(ax, [v.removesuffix(".0") for v in versions], rotation=90)
+        ax.set_ylabel("Prefix cohesion")
 
-        for text, series, offset in (("Whole system", overall, 0), (label, values, 0)):
+        for text, series, offset in ((WHOLE_LABELS[identifier_kind], overall, 0), (label, values, 0)):
             ax.annotate(text, xy=(positions[-1], series[-1]), xytext=(4, offset),
-                        textcoords="offset points", va="center", fontsize=7, color=INK,
+                        textcoords="offset points", va="center", fontsize=6.5, color=INK,
                         annotation_clip=False)
 
         for kind, release, text, side in EVENTS:
@@ -387,10 +392,9 @@ def write_decomposition_figure(
                         color=MUTED)
 
     middle = versions.index("10")
-    axes[0].annotate("test selectors", xy=(middle, (whole["method"][middle] + decomposed["method"][1][middle]) / 2),
+    axes[0].annotate("test method selectors", xy=(middle, (whole["method"][middle] + decomposed["method"][1][middle]) / 2),
                      ha="center", va="center", fontsize=6.5, color=INK, style="italic")
-    axes[0].set_ylabel("Prefix cohesion")
-    # Shared scale, but each panel keeps its own tick labels.
+    # Shared scale, but each panel keeps its own tick labels and axis label.
     axes[1].tick_params(axis="y", labelleft=True)
     save_figure(fig, path)
     plt.close(fig)
@@ -528,8 +532,8 @@ def main() -> None:
         versions,
         original,
         {
-            "method": ("Without test\nselectors", untested["method"]),
-            "class": ("Persistent\nfamilies", persistent["class"]),
+            "method": ("Method selectors\nwithout test*", untested["method"]),
+            "class": ("Persistent-\nfamily names", persistent["class"]),
         },
     )
 

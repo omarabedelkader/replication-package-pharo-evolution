@@ -36,7 +36,7 @@ from scipy.stats import rankdata, spearmanr
 from ..concepts import mean_pairwise_similarity, prefix_words, random_group_similarities, terms, tfidf_matrix
 from ..corpus import IdentifierRecord, read_corpus
 from ..paths import CORPUS_DIR, RESULTS_DIR
-from ..plotting import BLUE, COLUMN_WIDTH, GRID, INK, MUTED, ORANGE, SEQUENTIAL_RAMP, TEXT_WIDTH, pyplot, save_figure
+from ..plotting import BLUE, COLUMN_WIDTH, GRID, INK, MUTED, ORANGE, SEQUENTIAL_RAMP, TEXT_WIDTH, FIGURE_HEIGHT, pyplot, save_figure
 from ..vocabulary import PRIMARY_WEIGHTING, identifiers, package_family
 from .robustness_analysis import REPETITIONS, SEED, TEST_CONVENTION, encode_vocabulary, pooled_cohesion
 
@@ -317,52 +317,83 @@ def correlation_ranges(summaries: list[dict], stability: dict[str, list[float]])
     return ranges
 
 
+# Panels of the correlation figure, side by side and in the order of Figure 1
+# (selectors left, class names right):
+# [(group title, color key, [(row label, key)])] per panel.
+# Colors follow Figure 1: orange for class names, blue for selectors.
+CORRELATION_PANELS = (
+    (
+        ("Method selectors", "method", (
+            ("PC vs. CCP", "selector_pc_ccp"),
+            ("PC vs. CCP, size-adjusted", "selector_pc_ccp_partial"),
+        )),
+        ("Family size", "size", (
+            ("Size vs. CCP", "size_ccp"),
+            ("Size vs. class-name PC", "size_class_pc"),
+        )),
+    ),
+    (
+        ("Class names", "class", (
+            ("PC vs. CCP", "class_pc_ccp"),
+            ("PC vs. CCP, size-adjusted", "class_pc_ccp_partial"),
+            ("PC vs. CCP, no prefix words", "class_pc_ccp_unprefixed"),
+            ("PC vs. CCP, no test classes", "class_pc_ccp_untested"),
+        )),
+    ),
+)
+
+
 def write_correlation_figure(
     path: Path,
     summaries: list[dict],
     stability: dict[str, list[float]],
     system: dict[str, dict[str, float]],
 ) -> None:
-    """Dot plot of the Spearman correlations: across the families of each release
-    (median and range over the releases), then across the releases for the
-    whole system (see :mod:`system_ccp_analysis`)."""
+    """Dot plot of the Spearman correlations across the families of each release
+    (median and range over the releases), in two panels at full text width.
+    The whole-system correlations and the rank stability are printed in
+    run.log (see :mod:`system_ccp_analysis`)."""
     plt = pyplot()
-    family_rows = correlation_ranges(summaries, stability)
-    fig, axes = plt.subplots(
-        2, 1, figsize=(COLUMN_WIDTH, 3.5), sharex=True, constrained_layout=True,
-        gridspec_kw={"height_ratios": [len(family_rows), len(SYSTEM_CORRELATIONS) + 1.2]},
-    )
+    colors = {"class": ORANGE, "method": BLUE, "size": INK}
+    fig, axes = plt.subplots(1, 2, figsize=(TEXT_WIDTH, FIGURE_HEIGHT), constrained_layout=True)
 
-    ax = axes[0]
-    positions = np.arange(len(family_rows))
-    for position, (_, median, low, high) in zip(positions, family_rows):
-        ax.plot([low, high], [position, position], color=MUTED, linewidth=1.4, solid_capstyle="round")
-        ax.plot([median], [position], color=INK, marker="o", markersize=3.5, linestyle="none")
-    ax.set_yticks(positions, [row[0] for row in family_rows], fontsize=6.5)
-    ax.set_title(
-        "Across families (median, range)",
-        loc="left", fontsize=7,
-    )
+    def layout(groups):
+        # Every group starts with a header row, so both panels align.
+        position, rows, headers = 0.0, [], []
+        for title, kind, entries in groups:
+            headers.append((position, title, colors[kind]))
+            position += 1
+            for label, key in entries:
+                rows.append((position, label, key, kind))
+                position += 1
+        return position, rows, headers
 
-    ax = axes[1]
-    positions = np.arange(len(SYSTEM_CORRELATIONS))
-    for offset, (view, label, style) in zip((-0.2, 0.0, 0.2), SYSTEM_VIEWS):
-        values = [system[key][view] for _, key in SYSTEM_CORRELATIONS]
-        ax.plot(values, positions + offset, linestyle="none", markersize=3.5, label=label, **style)
-    ax.set_yticks(positions, [row[0] for row in SYSTEM_CORRELATIONS], fontsize=6.5)
-    ax.set_title(f"Whole system, over {len(summaries)} snapshots", loc="left", fontsize=7)
-    fig.legend(*ax.get_legend_handles_labels(), loc="outside lower center", ncols=3,
-               frameon=False, fontsize=6.5, handletextpad=0.3, columnspacing=0.8)
-
-    for ax in axes:
-        ax.axvline(0, color=MUTED, linewidth=0.6)
-        ax.invert_yaxis()
+    layouts = [layout(groups) for groups in CORRELATION_PANELS]
+    slots = max(size for size, _, _ in layouts)
+    for ax, groups, (_, rows, headers) in zip(axes, CORRELATION_PANELS, layouts):
+        for position, label, key, kind in rows:
+            values = [summary[key] for summary in summaries]
+            median, low, high = float(np.median(values)), min(values), max(values)
+            ax.plot([low, high], [position, position], color=colors[kind], alpha=0.35,
+                    linewidth=3, solid_capstyle="round")
+            ax.plot([median], [position], color=colors[kind], marker="o", markersize=4.5,
+                    markeredgecolor="white", markeredgewidth=0.6, linestyle="none")
+            ax.annotate(f"{median:+.2f}".replace("-", "\u2212"), xy=(high, position),
+                        xytext=(5, 0), textcoords="offset points", va="center",
+                        fontsize=6.5, color=INK)
+        ax.set_yticks([row[0] for row in rows], [row[1] for row in rows], fontsize=7)
+        for y, title, color in headers:
+            ax.annotate(title, xy=(0, y), xycoords=("axes fraction", "data"), xytext=(-4, 0),
+                        textcoords="offset points", ha="right", va="center",
+                        fontsize=8, fontweight="bold", color=color)
+        ax.set_ylim(slots - 0.5, -0.6)
+        ax.axvline(0, color=MUTED, linewidth=0.7)
         ax.tick_params(axis="y", length=0)
         ax.spines["left"].set_visible(False)
         ax.grid(True, axis="x")
         ax.set_axisbelow(True)
-    axes[-1].set_xlim(-1.05, 1.05)
-    axes[-1].set_xlabel(r"Spearman correlation $\rho$")
+        ax.set_xlim(-1, 1)
+        ax.set_xlabel(r"Spearman correlation $\rho$ across families")
     save_figure(fig, path)
     plt.close(fig)
 

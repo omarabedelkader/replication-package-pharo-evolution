@@ -12,12 +12,19 @@ from __future__ import annotations
 
 COLUMN_WIDTH = 3.5  # inches, one column of the IEEE conference format
 TEXT_WIDTH = 7.16  # inches, both columns
+# Every full-width figure of the paper has this height, so they look alike.
+FIGURE_HEIGHT = 2.25
 
 INK = "#0b0b0b"
 MUTED = "#52514e"
 GRID = "#d9d8d4"
 BLUE = "#2a78d6"
 ORANGE = "#eb6834"
+# Blue and orange mean selectors and class names (Figures 1 and 3). The
+# family-contribution figure shows something else (strengthens or weakens a
+# trend), so it uses its own pair, from the Okabe-Ito colour-blind-safe palette.
+GREEN = "#009e73"
+PURPLE = "#cc79a7"
 
 # One hue, light to dark, for ordered quantities.
 SEQUENTIAL_RAMP = ("#e4eefb", "#86b6ef", "#3987e5", "#1c5cab", "#0d366b")
@@ -65,7 +72,7 @@ def pyplot():
 
 def version_axis(ax, versions: list[str], rotation: int = 0) -> None:
     """Label the x axis with the release sequence."""
-    ax.set_xticks(range(len(versions)), versions, fontsize=6, rotation=rotation)
+    ax.set_xticks(range(len(versions)), versions, fontsize=7, rotation=rotation)
     ax.set_xlim(-0.5, len(versions) - 0.5)
     ax.set_xlabel("Pharo version")
     ax.grid(True, axis="y")
