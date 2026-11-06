@@ -1,0 +1,492 @@
+
+==> Preparing the Python environment
+Python 3.14.5
+
+==> Unit tests
+........................................................................ [ 92%]
+......                                                                   [100%]
+78 passed in 0.43s
+
+==> Corpus: results/corpus/ (download and extraction of the 14 releases)
+Pharo 1.0: fetching https://files.pharo.org/image/10/10517.zip
+Pharo 1.0: 141 packages, 2,982 classes, 51,820 methods -> pharo-1.0.jsonl.gz
+Pharo 2: fetching https://codeload.github.com/pharo-project/pharo-core/tar.gz/28cc87dd94fa3e8fef6278635a3f9abc0904869e
+Pharo 2: 229 packages, 3,309 classes, 58,925 methods -> pharo-2.jsonl.gz
+Pharo 3: fetching https://codeload.github.com/pharo-project/pharo-core/tar.gz/18c33b2573dbb03c9826acfa5d04edcc63540ab7
+Pharo 3: 286 packages, 4,115 classes, 69,241 methods -> pharo-3.jsonl.gz
+Pharo 4: fetching https://codeload.github.com/pharo-project/pharo-core/tar.gz/e5c8e4d89ca795062fdab1f50f6e7cd6ac692099
+Pharo 4: 359 packages, 5,029 classes, 83,788 methods -> pharo-4.jsonl.gz
+Pharo 5: fetching https://codeload.github.com/pharo-project/pharo-core/tar.gz/8d6c095bda8026b36cb51d1fe4fe3fa0e9e933d7
+Pharo 5: 426 packages, 5,802 classes, 88,384 methods -> pharo-5.jsonl.gz
+Pharo 6: fetching https://codeload.github.com/pharo-project/pharo-core/tar.gz/f35877b624a127a40c6abc4aad553ff063fab522
+Pharo 6: 477 packages, 6,537 classes, 95,227 methods -> pharo-6.jsonl.gz
+Pharo 7: fetching https://codeload.github.com/pharo-project/pharo/tar.gz/fd8c156d959653f52be6fd7f8c71edf8cfb8fe90
+Pharo 7: 468 packages, 6,286 classes, 89,539 methods -> pharo-7.jsonl.gz
+Pharo 8: fetching https://codeload.github.com/pharo-project/pharo/tar.gz/6b47e520dba66ca19ffd98f0ae0b031d677f7099
+Pharo 8: 667 packages, 8,393 classes, 107,749 methods -> pharo-8.jsonl.gz
+Pharo 9: fetching https://codeload.github.com/pharo-project/pharo/tar.gz/e1bb0fb7b6c4aaadd5106d19b58633c94dff1b69
+Pharo 9: 697 packages, 8,491 classes, 109,417 methods -> pharo-9.jsonl.gz
+Pharo 10: fetching https://codeload.github.com/pharo-project/pharo/tar.gz/28169ae414c78e07602b31545f43061b4fa7a88a
+Pharo 10: 645 packages, 7,340 classes, 96,837 methods -> pharo-10.jsonl.gz
+Pharo 11: fetching https://codeload.github.com/pharo-project/pharo/tar.gz/963dc3a7de9ee8e5543f6e62d25a2a283f7dcd48
+Pharo 11: 639 packages, 7,350 classes, 97,328 methods -> pharo-11.jsonl.gz
+Pharo 12: fetching https://codeload.github.com/pharo-project/pharo/tar.gz/7d5f14cb47c000853271e85a27706569614966e7
+Pharo 12: 602 packages, 7,234 classes, 94,062 methods -> pharo-12.jsonl.gz
+Pharo 13: fetching https://codeload.github.com/pharo-project/pharo/tar.gz/d7c6f761d5445e8b04a0aa5137e0d546ad9bcd89
+Pharo 13: 590 packages, 7,259 classes, 92,236 methods -> pharo-13.jsonl.gz
+Pharo 14: fetching https://codeload.github.com/pharo-project/pharo/tar.gz/3221b560a7cbcb4361c8be367d3efdc8e2303459
+Pharo 14: 586 packages, 7,404 classes, 91,424 methods -> pharo-14.jsonl.gz
+
+==> Check of the image reader on Pharo 2
+Pharo 2: 58,925 of the 58,925 methods of the export are found by the image reader in image 20628 (59,098 methods in the image)
+
+==> Check of the corpus
+Pharo 1.0  image      141 packages  2,982 classes   51,820 methods
+Pharo 2    filetree   229 packages  3,309 classes   58,925 methods
+Pharo 3    filetree   286 packages  4,115 classes   69,241 methods
+Pharo 4    filetree   359 packages  5,029 classes   83,788 methods
+Pharo 5    filetree   426 packages  5,802 classes   88,384 methods
+Pharo 6    filetree   477 packages  6,537 classes   95,227 methods
+Pharo 7    tonel      468 packages  6,286 classes   89,539 methods
+Pharo 8    tonel      667 packages  8,393 classes  107,749 methods
+Pharo 9    tonel      697 packages  8,491 classes  109,417 methods
+Pharo 10   tonel      645 packages  7,340 classes   96,837 methods
+Pharo 11   tonel      639 packages  7,350 classes   97,328 methods
+Pharo 12   tonel      602 packages  7,234 classes   94,062 methods
+Pharo 13   tonel      590 packages  7,259 classes   92,236 methods
+Pharo 14   tonel      586 packages  7,404 classes   91,424 methods
+Validated 14 releases.
+
+==> Table I: results/naming_conventions.tex
+Saved results/naming_conventions.tex
+
+==> Table II: results/corpus_size.tex
+Pharo  Packages  Classes Class names  Methods Selectors
+1.0         141    2,982       2,982   51,820    28,888
+2           229    3,309       3,309   58,925    32,799
+3           286    4,115       4,115   69,241    37,838
+4           359    5,029       5,029   83,788    42,839
+5           426    5,802       5,802   88,384    45,529
+6           477    6,537       6,537   95,227    49,143
+7           468    6,286       6,281   89,539    46,467
+8           667    8,393       8,388  107,749    53,257
+9           697    8,491       8,486  109,417    55,553
+10          645    7,340       7,334   96,837    50,039
+11          639    7,350       7,344   97,328    50,516
+12          602    7,234       7,233   94,062    48,878
+13          590    7,259       7,258   92,236    48,008
+14          586    7,404       7,403   91,424    47,691
+Saved results/corpus_size.tex
+
+==> Whole-system prefix cohesion (numbers in run.log)
+Selectors, Cohesion: 0.492 in Pharo 1.0 to 0.547 in Pharo 14 (+0.055), Spearman rho +0.987, slope +0.0037 per release
+Selectors, Top-1: 0.611 in Pharo 1.0 to 0.637 in Pharo 14 (+0.027), Spearman rho +0.965, slope +0.0017 per release
+Class names, Cohesion: 0.489 in Pharo 1.0 to 0.452 in Pharo 14 (-0.037), Spearman rho -0.903, slope -0.0032 per release
+Class names, Top-1: 0.655 in Pharo 1.0 to 0.609 in Pharo 14 (-0.045), Spearman rho -0.943, slope -0.0039 per release
+
+==> Vocabulary turnover: results/vocabulary_turnover.tex, results/frequent_prefixes.tex
+Selectors: 28,888 -> 47,691; kept 14,024 (relocated 6,249), removed 14,864, added 33,667, transient 26,821, ever 89,376
+  relative to Pharo 1.0: kept 48.5%, kept in none of the original families 21.6%, added 116.5% (2.4 added per kept name), transient 56.2% of the Pharo 14 vocabulary
+   1.0 -> 2   added  44.2%  removed  30.6%  relocated 2,862
+     2 -> 3   added  20.6%  removed   5.3%  relocated 832
+     3 -> 4   added  16.8%  removed   3.6%  relocated 3,505
+     4 -> 5   added  14.6%  removed   8.3%  relocated 2,778
+     5 -> 6   added  10.2%  removed   2.3%  relocated 431
+     6 -> 7   added   6.6%  removed  12.1%  relocated 1,994
+     7 -> 8   added  17.4%  removed   2.8%  relocated 693
+     8 -> 9   added   9.9%  removed   5.6%  relocated 726
+     9 -> 10  added   1.2%  removed  11.1%  relocated 290
+    10 -> 11  added   3.5%  removed   2.5%  relocated 87
+    11 -> 12  added   5.3%  removed   8.6%  relocated 2,249
+    12 -> 13  added   2.1%  removed   3.9%  relocated 348
+    13 -> 14  added   4.0%  removed   4.6%  relocated 1,684
+Class names: 2,982 -> 7,403; kept 937 (relocated 502), removed 2,045, added 6,466, transient 5,970, ever 15,418
+  relative to Pharo 1.0: kept 31.4%, kept in none of the original families 16.8%, added 216.8% (6.9 added per kept name), transient 80.6% of the Pharo 14 vocabulary
+   1.0 -> 2   added  55.9%  removed  45.0%  relocated 189
+     2 -> 3   added  31.7%  removed   7.4%  relocated 62
+     3 -> 4   added  26.8%  removed   4.5%  relocated 336
+     4 -> 5   added  22.4%  removed   7.1%  relocated 339
+     5 -> 6   added  15.4%  removed   2.7%  relocated 24
+     6 -> 7   added  11.2%  removed  15.1%  relocated 313
+     7 -> 8   added  40.2%  removed   6.7%  relocated 96
+     8 -> 9   added  15.2%  removed  14.0%  relocated 179
+     9 -> 10  added   2.9%  removed  16.5%  relocated 12
+    10 -> 11  added   4.1%  removed   3.9%  relocated 10
+    11 -> 12  added   7.8%  removed   9.3%  relocated 448
+    12 -> 13  added   6.1%  removed   5.7%  relocated 57
+    13 -> 14  added   7.6%  removed   5.6%  relocated 131
+Saved results/vocabulary_turnover.tex and results/frequent_prefixes.tex
+
+==> Package families (numbers in run.log)
+Method selectors: 281 families with at least 20 distinct identifiers; Spearman rho between family size and cohesion -0.77
+  120 families present in at least 6 snapshots: 36 increasing, 42 decreasing, 42 no trend (|rho| >= 0.5); 110 of them (92%) vary by less than 0.15
+Class names: 119 families with at least 20 distinct identifiers; Spearman rho between family size and cohesion -0.48
+  77 families present in at least 6 snapshots: 25 increasing, 20 decreasing, 32 no trend (|rho| >= 0.5); 61 of them (79%) vary by less than 0.15
+Method selectors: most and least cohesive families
+  Highest ConfigurationOfRubric               2 snapshots,    100 identifiers, mean cohesion 1.000, range 0.000
+  Highest ConfigurationOfZincHTTPComponents   3 snapshots,     90 identifiers, mean cohesion 0.977, range 0.003
+  Highest ConfigurationOfMetacello            1 snapshots,     58 identifiers, mean cohesion 0.963, range 0.000
+  Highest ConfigurationOfEpicea               1 snapshots,    178 identifiers, mean cohesion 0.962, range 0.000
+  Highest ConfigurationOfVersionner           3 snapshots,    115 identifiers, mean cohesion 0.961, range 0.011
+  Highest ConfigurationOfGlamourCore          3 snapshots,     99 identifiers, mean cohesion 0.955, range 0.054
+  Highest ConfigurationOfGTInspectorCore      3 snapshots,     79 identifiers, mean cohesion 0.951, range 0.047
+  Highest MonticelloFileServices             10 snapshots,     31 identifiers, mean cohesion 0.949, range 0.168
+  Highest ConfigurationOfGTSpotter            3 snapshots,     82 identifiers, mean cohesion 0.948, range 0.058
+  Highest ConfigurationOfGTPlaygroundCore     3 snapshots,     73 identifiers, mean cohesion 0.947, range 0.051
+  Lowest  Morphic                            14 snapshots,  9,225 identifiers, mean cohesion 0.476, range 0.018
+  Lowest  Sound                               1 snapshots,    813 identifiers, mean cohesion 0.496, range 0.000
+  Lowest  System                             14 snapshots,  6,340 identifiers, mean cohesion 0.508, range 0.045
+  Lowest  Deprecated90                        1 snapshots,    293 identifiers, mean cohesion 0.512, range 0.000
+  Lowest  Rubric                             11 snapshots,  1,937 identifiers, mean cohesion 0.522, range 0.008
+  Lowest  Spec2                               1 snapshots,  3,659 identifiers, mean cohesion 0.523, range 0.000
+  Lowest  Kernel                             14 snapshots,  7,382 identifiers, mean cohesion 0.523, range 0.111
+  Lowest  Athens                             12 snapshots,  1,175 identifiers, mean cohesion 0.523, range 0.010
+  Lowest  Iceberg                             1 snapshots,  1,087 identifiers, mean cohesion 0.525, range 0.000
+  Lowest  Glamour                             6 snapshots,  3,493 identifiers, mean cohesion 0.528, range 0.010
+Class names: most and least cohesive families
+  Highest Gofer                              12 snapshots,     37 identifiers, mean cohesion 1.000, range 0.000
+  Highest RPackage                           10 snapshots,     40 identifiers, mean cohesion 0.993, range 0.017
+  Highest Komitter                            4 snapshots,     49 identifiers, mean cohesion 0.980, range 0.016
+  Highest Alien                               5 snapshots,     21 identifiers, mean cohesion 0.980, range 0.047
+  Highest Athens                             12 snapshots,    154 identifiers, mean cohesion 0.979, range 0.018
+  Highest Metacello                          14 snapshots,    234 identifiers, mean cohesion 0.960, range 0.092
+  Highest Fonts                               8 snapshots,     21 identifiers, mean cohesion 0.953, range 0.181
+  Highest Announcements                      14 snapshots,     24 identifiers, mean cohesion 0.949, range 0.105
+  Highest NautilusCommon                      5 snapshots,     51 identifiers, mean cohesion 0.928, range 0.034
+  Highest VariablesLibrary                    7 snapshots,     29 identifiers, mean cohesion 0.928, range 0.014
+  Lowest  VB                                  1 snapshots,     27 identifiers, mean cohesion 0.432, range 0.000
+  Lowest  Regex                              13 snapshots,     34 identifiers, mean cohesion 0.445, range 0.040
+  Lowest  OB                                  1 snapshots,    412 identifiers, mean cohesion 0.459, range 0.000
+  Lowest  Zinc                               13 snapshots,    262 identifiers, mean cohesion 0.463, range 0.033
+  Lowest  Refactoring                        14 snapshots,  1,144 identifiers, mean cohesion 0.463, range 0.223
+  Lowest  GeneralRules                        6 snapshots,    282 identifiers, mean cohesion 0.486, range 0.215
+  Lowest  Fuel                               13 snapshots,    204 identifiers, mean cohesion 0.493, range 0.078
+  Lowest  General                             3 snapshots,    247 identifiers, mean cohesion 0.493, range 0.023
+  Lowest  Versionner                          4 snapshots,    145 identifiers, mean cohesion 0.496, range 0.029
+  Lowest  Pillar                              2 snapshots,     76 identifiers, mean cohesion 0.496, range 0.000
+Method selectors: families named in the text
+  Morphic      present 1.0 to 14, mean cohesion 0.476, 0.463 in 1.0 and 0.481 in 14, range 0.018, 4,335 identifiers in 1.0 and 6,579 in 14
+  System       present 1.0 to 14, mean cohesion 0.508, 0.487 in 1.0 and 0.532 in 14, range 0.045, 2,684 identifiers in 1.0 and 3,159 in 14
+  Kernel       present 1.0 to 14, mean cohesion 0.523, 0.451 in 1.0 and 0.560 in 14, range 0.111, 2,333 identifiers in 1.0 and 3,933 in 14
+  Graphics     present 1.0 to 14, mean cohesion 0.528, 0.495 in 1.0 and 0.540 in 14, range 0.051, 1,851 identifiers in 1.0 and 1,344 in 14
+  Collections  present 1.0 to 14, mean cohesion 0.596, 0.481 in 1.0 and 0.623 in 14, range 0.142, 1,220 identifiers in 1.0 and 2,307 in 14
+Class names: families named in the text
+  Metacello    present 1.0 to 14, mean cohesion 0.960, 1.000 in 1.0 and 1.000 in 14, range 0.092, 52 identifiers in 1.0 and 68 in 14
+  Athens       present 3 to 14, mean cohesion 0.979, 0.979 in 3 and 0.978 in 14, range 0.018, 111 identifiers in 3 and 140 in 14
+  Zinc         present 2 to 14, mean cohesion 0.463, 0.460 in 2 and 0.478 in 14, range 0.033, 122 identifiers in 2 and 204 in 14
+  Monticello   present 1.0 to 14, mean cohesion 0.497, 0.499 in 1.0 and 0.491 in 14, range 0.032, 98 identifiers in 1.0 and 110 in 14
+  Refactoring  present 1.0 to 14, mean cohesion 0.463, 0.450 in 1.0 and 0.345 in 14, range 0.223, 284 identifiers in 1.0 and 658 in 14
+  OB           present 1.0 to 1.0, mean cohesion 0.459, 0.459 in 1.0 and 0.459 in 1.0, range 0.000, 412 identifiers in 1.0 and 412 in 1.0
+  Glamour      present 4 to 9, mean cohesion 0.628, 0.632 in 4 and 0.628 in 9, range 0.008, 426 identifiers in 4 and 433 in 9
+  GT           present 4 to 9, mean cohesion 0.698, 0.817 in 4 and 0.679 in 9, range 0.197, 151 identifiers in 4 and 273 in 9
+  Spec         present 2 to 9, mean cohesion 0.680, 0.624 in 2 and 0.727 in 9, range 0.103, 124 identifiers in 2 and 332 in 9
+  Calypso      present 8 to 14, mean cohesion 0.616, 0.612 in 8 and 0.620 in 14, range 0.008, 716 identifiers in 8 and 712 in 14
+Sensitivity: families with at least 1 distinct identifiers
+Method selectors: 440 families with at least 1 distinct identifiers; Spearman rho between family size and cohesion -0.90
+  177 families present in at least 6 snapshots: 42 increasing, 44 decreasing, 91 no trend (|rho| >= 0.5); 163 of them (92%) vary by less than 0.15
+Class names: 432 families with at least 1 distinct identifiers; Spearman rho between family size and cohesion -0.86
+  174 families present in at least 6 snapshots: 33 increasing, 30 decreasing, 111 no trend (|rho| >= 0.5); 150 of them (86%) vary by less than 0.15
+Sensitivity: families with at least 10 distinct identifiers
+Method selectors: 308 families with at least 10 distinct identifiers; Spearman rho between family size and cohesion -0.80
+  125 families present in at least 6 snapshots: 37 increasing, 43 decreasing, 45 no trend (|rho| >= 0.5); 114 of them (91%) vary by less than 0.15
+Class names: 172 families with at least 10 distinct identifiers; Spearman rho between family size and cohesion -0.61
+  98 families present in at least 6 snapshots: 29 increasing, 26 decreasing, 43 no trend (|rho| >= 0.5); 78 of them (80%) vary by less than 0.15
+Sensitivity: families with at least 50 distinct identifiers
+Method selectors: 229 families with at least 50 distinct identifiers; Spearman rho between family size and cohesion -0.72
+  107 families present in at least 6 snapshots: 33 increasing, 36 decreasing, 38 no trend (|rho| >= 0.5); 101 of them (94%) vary by less than 0.15
+Class names: 74 families with at least 50 distinct identifiers; Spearman rho between family size and cohesion -0.33
+  52 families present in at least 6 snapshots: 15 increasing, 16 decreasing, 21 no trend (|rho| >= 0.5); 41 of them (79%) vary by less than 0.15
+
+==> Table III and Figure 1: results/robustness_trends.tex, results/cohesion_decomposition.tex, results/robustness_full.tex
+Selectors, prefix length 1: 0.450 to 0.561 (+0.110), Spearman rho +1.00, slope +0.0079
+Selectors, prefix length 2: 0.430 to 0.515 (+0.085), Spearman rho +1.00, slope +0.0061
+Selectors, prefix length 3: 0.571 to 0.640 (+0.069), Spearman rho +1.00, slope +0.0050
+Selectors, prefix length 4: 0.519 to 0.472 (-0.047), Spearman rho -0.86, slope -0.0045
+Selectors, prefix length 1-4: 0.492 to 0.547 (+0.055), Spearman rho +0.99, slope +0.0037
+Class names, prefix length 1: 0.347 to 0.349 (+0.002), Spearman rho +0.57, slope +0.0021
+Class names, prefix length 2: 0.322 to 0.371 (+0.049), Spearman rho +0.08, slope +0.0025
+Class names, prefix length 3: 0.566 to 0.467 (-0.098), Spearman rho -0.83, slope -0.0102
+Class names, prefix length 4: 0.725 to 0.624 (-0.101), Spearman rho -0.88, slope -0.0073
+Class names, prefix length 1-4: 0.489 to 0.452 (-0.037), Spearman rho -0.90, slope -0.0032
+Selectors without test names, prefix length 1: 0.400 to 0.438 (+0.038), Spearman rho +0.74, slope +0.0020
+Selectors without test names, prefix length 2: 0.369 to 0.369 (-0.000), Spearman rho -0.43, slope -0.0010
+Selectors without test names, prefix length 3: 0.516 to 0.518 (+0.002), Spearman rho -0.43, slope -0.0006
+Selectors without test names, prefix length 4: 0.566 to 0.575 (+0.009), Spearman rho -0.10, slope +0.0000
+Selectors without test names, prefix length 1-4: 0.462 to 0.475 (+0.012), Spearman rho -0.17, slope +0.0001
+Selectors: 500 equal-size samples of 20,000; 2.5th to 97.5th percentile of the slope [+0.0030, +0.0035]; 500 of 500 slopes positive, 0 negative
+Selectors: 18 persistent families cover 42% to 61% of the release vocabulary (61% in Pharo 1.0, 51% in Pharo 14); Spearman rho of their series +0.98
+  families: AST, Announcements, Collections, Compression, Files, FreeType, Graphics, Kernel, Metacello, Monticello, Morphic, Multilingual, Network, Refactoring, SUnit, Shout, System, Tools
+Selectors: test identifiers are 11% of the vocabulary in Pharo 1.0 and 25% in Pharo 14; without them Spearman rho is -0.17
+  share of test identifiers per release: 1.0 11.4%, 2 12.4%, 3 13.6%, 4 13.8%, 5 14.4%, 6 14.3%, 7 16.3%, 8 18.5%, 9 20.2%, 10 21.3%, 11 21.9%, 12 23.7%, 13 24.5%, 14 25.2% (from 11.4% in Pharo 1.0 to 25.2% in Pharo 14; lowest 11.4%, highest 25.2%)
+  cohesion without them per release: 1.0 0.4623, 2 0.4748, 3 0.4816, 4 0.4848, 5 0.4871, 6 0.4879, 7 0.4796, 8 0.4818, 9 0.4822, 10 0.4811, 11 0.4808, 12 0.4761, 13 0.4761, 14 0.4747 (highest in Pharo 6)
+Class names: 500 equal-size samples of 1,500; 2.5th to 97.5th percentile of the slope [-0.0037, -0.0020]; 0 of 500 slopes positive, 500 negative
+Class names: 18 persistent families cover 26% to 45% of the release vocabulary (44% in Pharo 1.0, 36% in Pharo 14); Spearman rho of their series -0.31
+  families: AST, Announcements, Collections, Compression, Files, FreeType, Graphics, Kernel, Metacello, Monticello, Morphic, Multilingual, Network, Refactoring, SUnit, Shout, System, Tools
+Class names: test identifiers are 17% of the vocabulary in Pharo 1.0 and 24% in Pharo 14; without them Spearman rho is -0.90
+  share of test identifiers per release: 1.0 17.2%, 2 17.1%, 3 16.8%, 4 16.0%, 5 15.4%, 6 15.1%, 7 17.1%, 8 19.6%, 9 20.1%, 10 21.2%, 11 21.6%, 12 22.6%, 13 23.6%, 14 24.3% (from 17.2% in Pharo 1.0 to 24.3% in Pharo 14; lowest 15.1%, highest 24.3%)
+  cohesion without them per release: 1.0 0.4944, 2 0.4735, 3 0.4908, 4 0.4972, 5 0.4904, 6 0.4917, 7 0.4885, 8 0.4733, 9 0.4662, 10 0.4630, 11 0.4617, 12 0.4604, 13 0.4591, 14 0.4591 (highest in Pharo 4)
+Saved results/robustness_trends.tex
+Saved results/robustness_full.tex
+Saved results/cohesion_decomposition.tex
+
+==> Figure 2: results/family_contributions.tex
+Method selectors: change +0.0546, slope +0.0037
+  without the 358 families that entered: change +0.0352, slope +0.0027
+  without the 244 families that left: change +0.0914, slope +0.0067
+  Kernel                   all      change +0.0064  share of slope +15%
+  Collections              all      change +0.0047  share of slope +12%
+  Traits                   1.0--14  change +0.0031  share of slope +6%
+  System                   all      change +0.0021  share of slope +6%
+  Calypso                  8--14    change +0.0015  share of slope +5%
+  AST                      all      change +0.0018  share of slope +5%
+  Compiler                 1.0--6   change +0.0018  share of slope +4%
+  OpalCompiler             3--14    change +0.0017  share of slope +4%
+  Fuel                     2--14    change +0.0014  share of slope +4%
+  Reflectivity             4--14    change +0.0012  share of slope +4%
+Class names: change -0.0369, slope -0.0032
+  without the 353 families that entered: change -0.0000, slope -0.0002
+  without the 237 families that left: change -0.0333, slope -0.0036
+  OB                       1.0      change -0.0158  share of slope +14%
+  Clap                     8--14    change -0.0021  share of slope +13%
+  Morphic                  all      change -0.0028  share of slope +12%
+  Reflectivity             4--14    change -0.0039  share of slope +12%
+  Rubric                   4--14    change -0.0034  share of slope +8%
+  HeuristicCompletion      9--14    change -0.0030  share of slope +8%
+  General                  12--14   change -0.0030  share of slope +8%
+  Fuel                     2--14    change -0.0045  share of slope +7%
+  Gofer                    1.0--12  change -0.0042  share of slope +6%
+  Ring                     2--14    change -0.0027  share of slope +6%
+Method selectors: families shown in the figure
+  Kernel                   all      n 2,333 -> 3,933  change +0.0064  share of slope +15%
+  Collections              all      n 1,220 -> 2,307  change +0.0047  share of slope +12%
+  Traits                   1.0--14  n 514 -> 563  change +0.0031  share of slope +6%
+  System                   all      n 2,684 -> 3,159  change +0.0021  share of slope +6%
+  KernelTests              1.0--4   n 584 -> 0  change -0.0048  share of slope -12%
+  CollectionsTests         1.0--4   n 787 -> 0  change -0.0055  share of slope -12%
+  Tests                    1.0--11  n 1,334 -> 0  change -0.0110  share of slope -17%
+Class names: families shown in the figure
+  OB                       1.0      n 412 -> 0  change -0.0158  share of slope +14%
+  Clap                     8--14    n 0 -> 59  change -0.0021  share of slope +13%
+  Morphic                  all      n 177 -> 476  change -0.0028  share of slope +12%
+  Reflectivity             4--14    n 0 -> 95  change -0.0039  share of slope +12%
+  Rubric                   4--14    n 0 -> 129  change -0.0034  share of slope +8%
+  HeuristicCompletion      9--14    n 0 -> 149  change -0.0030  share of slope +8%
+  Athens                   3--14    n 0 -> 140  change +0.0057  share of slope -8%
+  CollectionsTests         1.0--4   n 115 -> 0  change +0.0035  share of slope -9%
+  OSWindow                 4--14    n 0 -> 249  change +0.0027  share of slope -9%
+Class names, all 13 consecutive-release changes: 1.0 -> 2 -0.0191, 2 -> 3 +0.0141, 3 -> 4 +0.0068, 4 -> 5 -0.0081, 5 -> 6 +0.0003, 6 -> 7 -0.0024, 7 -> 8 -0.0172, 8 -> 9 -0.0063, 9 -> 10 -0.0029, 10 -> 11 -0.0012, 11 -> 12 +0.0007, 12 -> 13 -0.0026, 13 -> 14 +0.0011
+Class names, 1.0 -> 2: change -0.0191; without the 50 families entering in 2: +0.0097 (151% of the decrease removed)
+Class names, 7 -> 8: change -0.0172; without the 58 families entering in 8: -0.0041 (76% of the decrease removed)
+Class names, 4 -> 5: change -0.0081; without the 45 families entering in 5: -0.0036 (56% of the decrease removed)
+OB in Pharo 1.0: 412 of 412 classes start with OB or OR
+Calypso in Pharo 14: 700 of 712 classes start with Cly
+Metacello in Pharo 14: 63 of 68 classes start with Metacello
+Athens in Pharo 14: 113 of 140 classes start with Athens
+Saved results/family_contributions.tex
+
+==> Figure 3: results/ccp_correlations.tex (also results/ccp_prefix_cohesion.tex, results/ccp_family_ranks.tex)
+Pharo  1.0:  44 families,  44 above random, baseline 0.0212, rho(PC, CCP) +0.41 (partial +0.03, no prefix +0.41 [partial +0.04], no tests +0.32 [partial -0.08]), rho(selector PC, CCP) +0.62 (partial +0.44), rho(size, CCP) -0.67
+Pharo    2:  53 families,  53 above random, baseline 0.0189, rho(PC, CCP) +0.28 (partial -0.02, no prefix +0.22 [partial -0.08], no tests +0.25 [partial -0.02]), rho(selector PC, CCP) +0.48 (partial +0.27), rho(size, CCP) -0.56
+Pharo    3:  66 families,  66 above random, baseline 0.0181, rho(PC, CCP) +0.35 (partial +0.13, no prefix +0.31 [partial +0.07], no tests +0.29 [partial +0.10]), rho(selector PC, CCP) +0.51 (partial +0.29), rho(size, CCP) -0.58
+Pharo    4:  66 families,  66 above random, baseline 0.0176, rho(PC, CCP) +0.23 (partial +0.01, no prefix +0.23 [partial -0.01], no tests +0.25 [partial +0.02]), rho(selector PC, CCP) +0.48 (partial +0.31), rho(size, CCP) -0.47
+Pharo    5:  66 families,  66 above random, baseline 0.0169, rho(PC, CCP) +0.21 (partial -0.10, no prefix +0.18 [partial -0.12], no tests +0.22 [partial -0.07]), rho(selector PC, CCP) +0.56 (partial +0.35), rho(size, CCP) -0.53
+Pharo    6:  72 families,  72 above random, baseline 0.0162, rho(PC, CCP) +0.12 (partial -0.11, no prefix +0.08 [partial -0.18], no tests +0.14 [partial -0.12]), rho(selector PC, CCP) +0.59 (partial +0.34), rho(size, CCP) -0.58
+Pharo    7:  68 families,  68 above random, baseline 0.0166, rho(PC, CCP) +0.22 (partial -0.14, no prefix +0.26 [partial -0.12], no tests +0.20 [partial -0.12]), rho(selector PC, CCP) +0.67 (partial +0.46), rho(size, CCP) -0.58
+Pharo    8:  82 families,  82 above random, baseline 0.0172, rho(PC, CCP) +0.19 (partial -0.19, no prefix +0.25 [partial -0.17], no tests +0.22 [partial -0.15]), rho(selector PC, CCP) +0.69 (partial +0.50), rho(size, CCP) -0.56
+Pharo    9:  89 families,  89 above random, baseline 0.0165, rho(PC, CCP) +0.13 (partial -0.22, no prefix +0.24 [partial -0.14], no tests +0.09 [partial -0.22]), rho(selector PC, CCP) +0.67 (partial +0.50), rho(size, CCP) -0.53
+Pharo   10:  81 families,  81 above random, baseline 0.0171, rho(PC, CCP) +0.20 (partial -0.15, no prefix +0.28 [partial -0.09], no tests +0.16 [partial -0.14]), rho(selector PC, CCP) +0.68 (partial +0.50), rho(size, CCP) -0.56
+Pharo   11:  84 families,  84 above random, baseline 0.0172, rho(PC, CCP) +0.21 (partial -0.17, no prefix +0.27 [partial -0.14], no tests +0.11 [partial -0.22]), rho(selector PC, CCP) +0.66 (partial +0.48), rho(size, CCP) -0.54
+Pharo   12:  79 families,  79 above random, baseline 0.0174, rho(PC, CCP) +0.22 (partial -0.12, no prefix +0.30 [partial -0.06], no tests +0.16 [partial -0.14]), rho(selector PC, CCP) +0.64 (partial +0.47), rho(size, CCP) -0.51
+Pharo   13:  80 families,  80 above random, baseline 0.0175, rho(PC, CCP) +0.23 (partial -0.10, no prefix +0.36 [partial +0.02], no tests +0.16 [partial -0.15]), rho(selector PC, CCP) +0.63 (partial +0.48), rho(size, CCP) -0.51
+Pharo   14:  79 families,  79 above random, baseline 0.0176, rho(PC, CCP) +0.16 (partial -0.15, no prefix +0.26 [partial -0.07], no tests +0.11 [partial -0.16]), rho(selector PC, CCP) +0.61 (partial +0.48), rho(size, CCP) -0.44
+Rank stability of ccp: median +0.99, range [+0.88, +1.00]
+Rank stability of class_cohesion: median +0.99, range [+0.92, +1.00]
+Pharo 14 family types: {'diffuse': 21, 'aligned': 22, 'prefix only': 18, 'concept only': 18}
+    1/79 MonticelloMocks            n=  11 PC=1.000 (rank 4) CCP=0.608 CCP-=0.514 p=0.002 aligned                  ['mc']
+    2/79 Jobs                       n=  10 PC=0.868 (rank 15) CCP=0.485 CCP-=0.079 p=0.002 aligned                  ['job']
+    3/79 ClassAnnotation            n=  38 PC=0.815 (rank 22) CCP=0.358 CCP-=0.355 p=0.002 aligned                  ['class']
+    4/79 SortFunctions              n=  11 PC=0.864 (rank 17) CCP=0.346 CCP-=0.346 p=0.002 aligned                  []
+    5/79 Hermes                     n=  42 PC=0.571 (rank 69) CCP=0.321 CCP-=0.208 p=0.002 concept only             ['he']
+    6/79 Fonts                      n=  12 PC=1.000 (rank 2) CCP=0.315 CCP-=0.303 p=0.002 aligned                  ['abstract']
+    7/79 General                    n= 244 PC=0.486 (rank 76) CCP=0.314 CCP-=0.292 p=0.002 concept only             ['re']
+    8/79 ClassDefinitionPrinters    n=  12 PC=0.859 (rank 18) CCP=0.308 CCP-=0.308 p=0.002 aligned                  []
+    9/79 SystemCommands             n= 162 PC=0.659 (rank 49) CCP=0.306 CCP-=0.247 p=0.002 concept only             ['syc']
+   10/79 ClassParser                n=  60 PC=0.706 (rank 40) CCP=0.273 CCP-=0.206 p=0.002 aligned                  ['cd']
+   11/79 RottenTestsFinder          n=  34 PC=0.592 (rank 62) CCP=0.268 CCP-=0.200 p=0.002 concept only             ['rtf']
+   12/79 Commander2                 n=  33 PC=0.711 (rank 36) CCP=0.264 CCP-=0.146 p=0.002 aligned                  ['cm']
+   13/79 EmbeddedFreeType           n=  12 PC=1.000 (rank 1) CCP=0.263 CCP-=0.263 p=0.002 aligned                  []
+   14/79 MonticelloRemoteRepositories n=  15 PC=0.624 (rank 56) CCP=0.254 CCP-=0.232 p=0.002 concept only             ['mc']
+   15/79 Commander                  n=  53 PC=0.678 (rank 46) CCP=0.247 CCP-=0.158 p=0.002 concept only             ['cmd']
+   16/79 DebugPoints                n=  30 PC=0.867 (rank 16) CCP=0.244 CCP-=0.191 p=0.002 aligned                  ['debug']
+   17/79 Epicea                     n=  62 PC=0.551 (rank 70) CCP=0.243 CCP-=0.141 p=0.002 concept only             ['ep']
+   18/79 EnlumineurFormatter        n=  25 PC=0.584 (rank 67) CCP=0.242 CCP-=0.211 p=0.002 concept only             ['ef']
+   19/79 Ombu                       n=  38 PC=0.642 (rank 52) CCP=0.237 CCP-=0.145 p=0.002 concept only             ['om']
+   20/79 STON                       n=  32 PC=0.786 (rank 28) CCP=0.226 CCP-=0.086 p=0.002 aligned                  ['ston']
+   21/79 Announcements              n=  19 PC=0.895 (rank 12) CCP=0.219 CCP-=0.219 p=0.002 aligned                  []
+   22/79 Zodiac                     n=  23 PC=0.703 (rank 41) CCP=0.206 CCP-=0.148 p=0.002 concept only             ['zdc']
+   23/79 Metacello                  n=  68 PC=1.000 (rank 3) CCP=0.201 CCP-=0.142 p=0.002 aligned                  ['metacello']
+   24/79 Keymapping                 n=  50 PC=0.637 (rank 53) CCP=0.195 CCP-=0.133 p=0.002 concept only             ['km']
+   25/79 Hiedra                     n=  20 PC=0.775 (rank 29) CCP=0.190 CCP-=0.143 p=0.002 aligned                  ['hi']
+   26/79 CodeImport                 n=  26 PC=0.723 (rank 34) CCP=0.186 CCP-=0.186 p=0.002 aligned                  []
+   27/79 NewValueHolder             n=  11 PC=1.000 (rank 5) CCP=0.182 CCP-=0.182 p=0.002 aligned                  []
+   28/79 DebugInfo                  n=  10 PC=0.900 (rank 11) CCP=0.178 CCP-=0.180 p=0.002 aligned                  []
+   29/79 Traits                     n=  67 PC=0.755 (rank 30) CCP=0.178 CCP-=0.096 p=0.002 aligned                  ['trait']
+   30/79 DrTests                    n=  81 PC=0.538 (rank 71) CCP=0.171 CCP-=0.107 p=0.002 concept only             ['dt']
+   31/79 Shift                      n=  65 PC=0.616 (rank 60) CCP=0.171 CCP-=0.121 p=0.002 concept only             ['sh']
+   32/79 Equals                     n=  11 PC=0.824 (rank 21) CCP=0.171 CCP-=0.113 p=0.002 aligned                  ['eq']
+   33/79 VariablesLibrary           n=  29 PC=0.931 (rank 9) CCP=0.170 CCP-=0.170 p=0.002 aligned                  []
+   34/79 HeuristicCompletion        n= 149 PC=0.585 (rank 66) CCP=0.170 CCP-=0.123 p=0.002 concept only             ['co']
+   35/79 Shout                      n=  13 PC=0.623 (rank 57) CCP=0.169 CCP-=0.138 p=0.002 concept only             ['shrb']
+   36/79 PharoBootstrap             n=  17 PC=0.616 (rank 59) CCP=0.163 CCP-=0.076 p=0.002 concept only             ['pb']
+   37/79 Flashback                  n=  14 PC=0.710 (rank 38) CCP=0.161 CCP-=0.153 p=0.002 aligned                  ['fbd']
+   38/79 TaskIt                     n=  64 PC=0.587 (rank 64) CCP=0.161 CCP-=0.113 p=0.002 concept only             ['tkt']
+   39/79 Fuel                       n= 175 PC=0.487 (rank 75) CCP=0.149 CCP-=0.094 p=0.002 concept only             ['fl']
+   40/79 Beacon                     n=  17 PC=0.812 (rank 23) CCP=0.148 CCP-=0.148 p=0.002 aligned                  []
+   41/79 UnifiedFFI                 n= 169 PC=0.644 (rank 51) CCP=0.147 CCP-=0.108 p=0.002 diffuse                  ['ffi']
+   42/79 NECompletion               n=  28 PC=0.720 (rank 35) CCP=0.147 CCP-=0.133 p=0.002 prefix only              ['co']
+   43/79 Ring                       n= 144 PC=0.582 (rank 68) CCP=0.145 CCP-=0.100 p=0.002 diffuse                  ['rg']
+   44/79 Files                      n=  21 PC=0.881 (rank 14) CCP=0.144 CCP-=0.144 p=0.002 prefix only              []
+   45/79 BeautifulComments          n=  10 PC=0.710 (rank 37) CCP=0.140 CCP-=0.138 p=0.002 prefix only              ['cly']
+   46/79 Compression                n=  31 PC=0.700 (rank 42) CCP=0.139 CCP-=0.098 p=0.002 diffuse                  ['zip']
+   47/79 Clap                       n=  59 PC=0.797 (rank 26) CCP=0.138 CCP-=0.093 p=0.002 prefix only              ['clap']
+   48/79 Deprecated14               n=  13 PC=0.830 (rank 20) CCP=0.133 CCP-=0.133 p=0.002 prefix only              []
+   49/79 AST                        n= 111 PC=0.502 (rank 73) CCP=0.129 CCP-=0.100 p=0.002 diffuse                  ['oc']
+   50/79 Debugger                   n=  83 PC=0.853 (rank 19) CCP=0.125 CCP-=0.128 p=0.002 prefix only              []
+   51/79 Renraku                    n=  90 PC=0.510 (rank 72) CCP=0.120 CCP-=0.095 p=0.002 diffuse                  ['re']
+   52/79 Slot                       n=  52 PC=0.807 (rank 24) CCP=0.119 CCP-=0.119 p=0.002 prefix only              []
+   53/79 Reflectivity               n=  96 PC=0.634 (rank 54) CCP=0.116 CCP-=0.115 p=0.002 diffuse                  []
+   54/79 Monticello                 n= 110 PC=0.491 (rank 74) CCP=0.115 CCP-=0.070 p=0.002 diffuse                  ['mc']
+   55/79 Regex                      n=  32 PC=0.458 (rank 78) CCP=0.114 CCP-=0.114 p=0.002 diffuse                  []
+   56/79 OSWindow                   n= 249 PC=0.740 (rank 31) CCP=0.114 CCP-=0.098 p=0.002 prefix only              ['os']
+   57/79 FFI                        n=  13 PC=0.947 (rank 7) CCP=0.110 CCP-=0.119 p=0.002 prefix only              []
+   58/79 Rubric                     n= 129 PC=0.685 (rank 45) CCP=0.109 CCP-=0.065 p=0.002 diffuse                  ['rub']
+   59/79 ThreadedFFI                n=  84 PC=0.693 (rank 43) CCP=0.108 CCP-=0.086 p=0.002 diffuse                  ['tf']
+   60/79 FormCanvas                 n=  15 PC=0.892 (rank 13) CCP=0.106 CCP-=0.106 p=0.002 prefix only              []
+   61/79 FileSystem                 n= 100 PC=0.709 (rank 39) CCP=0.105 CCP-=0.105 p=0.002 prefix only              []
+   62/79 Text                       n=  50 PC=0.798 (rank 25) CCP=0.099 CCP-=0.074 p=0.002 prefix only              ['text']
+   63/79 Athens                     n= 140 PC=0.978 (rank 6) CCP=0.097 CCP-=0.060 p=0.002 prefix only              ['athen']
+   64/79 TestRunner                 n=  33 PC=0.794 (rank 27) CCP=0.091 CCP-=0.091 p=0.002 prefix only              []
+   65/79 Calypso                    n= 712 PC=0.620 (rank 58) CCP=0.089 CCP-=0.066 p=0.002 diffuse                  ['cly']
+   66/79 Zinc                       n= 204 PC=0.478 (rank 77) CCP=0.087 CCP-=0.054 p=0.002 diffuse                  ['zn']
+   67/79 Collections                n= 223 PC=0.663 (rank 48) CCP=0.084 CCP-=0.084 p=0.002 diffuse                  []
+   68/79 Refactoring                n= 658 PC=0.345 (rank 79) CCP=0.084 CCP-=0.086 p=0.002 diffuse                  []
+   69/79 Tools                      n=  14 PC=0.942 (rank 8) CCP=0.083 CCP-=0.083 p=0.002 prefix only              []
+   70/79 OpalCompiler               n= 170 PC=0.590 (rank 63) CCP=0.079 CCP-=0.081 p=0.002 diffuse                  []
+   71/79 FreeType                   n=  51 PC=0.610 (rank 61) CCP=0.074 CCP-=0.074 p=0.002 diffuse                  []
+   72/79 Debugging                  n=  10 PC=0.929 (rank 10) CCP=0.064 CCP-=0.064 p=0.002 prefix only              []
+   73/79 SUnit                      n= 114 PC=0.658 (rank 50) CCP=0.062 CCP-=0.062 p=0.002 diffuse                  []
+   74/79 Tool                       n=  51 PC=0.734 (rank 32) CCP=0.062 CCP-=0.062 p=0.002 prefix only              []
+   75/79 Graphics                   n=  80 PC=0.692 (rank 44) CCP=0.060 CCP-=0.060 p=0.002 diffuse                  []
+   76/79 Network                    n=  59 PC=0.727 (rank 33) CCP=0.055 CCP-=0.055 p=0.002 prefix only              []
+   77/79 Morphic                    n= 476 PC=0.586 (rank 65) CCP=0.054 CCP-=0.054 p=0.002 diffuse                  []
+   78/79 Kernel                     n= 313 PC=0.627 (rank 55) CCP=0.030 CCP-=0.030 p=0.002 diffuse                  []
+   79/79 System                     n= 309 PC=0.670 (rank 47) CCP=0.027 CCP-=0.027 p=0.002 diffuse                  []
+Type stability over 164 families: median share of snapshots with the usual type 100%; 87% of the families keep their usual type in at least 75% of their snapshots
+32 families ranked in at least 12 releases: ['ProfStef', 'Gofer', 'CodeImport', 'Zodiac', 'Announcements', 'Keymapping', 'Fuel', 'Ring', 'Files', 'NECompletion', 'Metacello', 'Compression', 'AST', 'Refactoring', 'FileSystem', 'Slot', 'Regex', 'Monticello', 'Polymorph', 'Athens', 'OpalCompiler', 'Text', 'Tools', 'Zinc', 'FreeType', 'SUnit', 'Collections', 'Graphics', 'Morphic', 'Network', 'Kernel', 'System']
+Class PC – CCP                                 median +0.21  range [+0.12, +0.41]
+Class PC – CCP, size out                       median -0.11  range [-0.22, +0.13]
+Class PC – CCP w/o prefix words                median +0.26  range [+0.08, +0.41]
+Class PC – CCP w/o test classes                median +0.18  range [+0.09, +0.32]
+Class PC – CCP w/o prefix words, size out      median -0.08  range [-0.18, +0.07]
+Class PC – CCP w/o test classes, size out      median -0.13  range [-0.22, +0.10]
+Selector PC – CCP                              median +0.63  range [+0.48, +0.69]
+Selector PC – CCP, size out                    median +0.47  range [+0.27, +0.50]
+Size – CCP                                     median -0.55  range [-0.67, -0.44]
+Size – class PC                                median -0.55  range [-0.61, -0.36]
+CCP, next snapshot                             median +0.99  range [+0.88, +1.00]
+Class PC, next snapshot                        median +0.99  range [+0.92, +1.00]
+Pharo  1.0: system CCP 0.0212 (persistent 0.0240), class PC 0.489 (persistent 0.487), selector PC 0.492, 79 families
+Pharo    2: system CCP 0.0189 (persistent 0.0222), class PC 0.470 (persistent 0.509), selector PC 0.507, 84 families
+Pharo    3: system CCP 0.0181 (persistent 0.0223), class PC 0.484 (persistent 0.529), selector PC 0.517, 101 families
+Pharo    4: system CCP 0.0176 (persistent 0.0236), class PC 0.491 (persistent 0.528), selector PC 0.520, 121 families
+Pharo    5: system CCP 0.0169 (persistent 0.0217), class PC 0.483 (persistent 0.518), selector PC 0.523, 149 families
+Pharo    6: system CCP 0.0162 (persistent 0.0211), class PC 0.483 (persistent 0.520), selector PC 0.524, 174 families
+Pharo    7: system CCP 0.0166 (persistent 0.0196), class PC 0.481 (persistent 0.527), selector PC 0.523, 132 families
+Pharo    8: system CCP 0.0172 (persistent 0.0194), class PC 0.464 (persistent 0.526), selector PC 0.532, 185 families
+Pharo    9: system CCP 0.0165 (persistent 0.0194), class PC 0.457 (persistent 0.521), selector PC 0.538, 201 families
+Pharo   10: system CCP 0.0171 (persistent 0.0191), class PC 0.454 (persistent 0.519), selector PC 0.540, 197 families
+Pharo   11: system CCP 0.0172 (persistent 0.0191), class PC 0.453 (persistent 0.516), selector PC 0.542, 194 families
+Pharo   12: system CCP 0.0174 (persistent 0.0206), class PC 0.454 (persistent 0.500), selector PC 0.543, 185 families
+Pharo   13: system CCP 0.0175 (persistent 0.0207), class PC 0.451 (persistent 0.499), selector PC 0.546, 184 families
+Pharo   14: system CCP 0.0176 (persistent 0.0209), class PC 0.452 (persistent 0.488), selector PC 0.547, 195 families
+class_pc_ccp         whole +0.16  persistent -0.06  changes -0.10
+selector_pc_ccp      whole -0.33  persistent -0.68  changes -0.40
+families_ccp         whole -0.56  persistent +nan  changes -0.44
+families_class_pc    whole -0.73  persistent +nan  changes -0.11
+order_ccp            whole -0.33  persistent -0.70  changes +nan
+Saved results/ccp_correlations.tex
+Saved results/ccp_prefix_cohesion.tex
+Saved results/ccp_family_ranks.tex
+
+==> Similarity between families (numbers in run.log)
+Nearest family / own CCP over 1009 family-releases: median 0.41, 90th percentile 0.85, at least one in 3.6%
+Nearest family reaches the own CCP in 36 of 1009 family-releases: {'tests': 2, 'low own CCP': 15, 'split': 16, 'successor': 3}
+  Kernel         own CCP at most 0.031, nearest Slot, Traits
+  Monticello     own CCP at most 0.115, nearest MonticelloFileTree, MonticelloMocks
+  Morphic        own CCP at most 0.054, nearest Polymorph
+  Network        own CCP at most 0.053, nearest Zodiac
+  Refactoring    own CCP at most 0.110, nearest Refactoring2
+  Renraku        own CCP at most 0.122, nearest General, GeneralRules
+  System         own CCP at most 0.031, nearest Files, RPackage
+  Tests          own CCP at most 0.062, nearest MorphicTests
+  Tool           own CCP at most 0.062, nearest MonticelloGUI
+53 distinct pairs among the 10 most similar of each release: {'split': 17, 'related': 28, 'tests': 2, 'successor': 6}
+  split        Monticello--MonticelloFileTree: 11 releases, last 13 similarity 0.127 (ratio 1.11) ['mc', 'definition', 'version', 'file', 'info']
+  related      Files--MonticelloFileTree: 10 releases, last 12 similarity 0.096 (ratio 0.62) ['file', 'write', 'stream', 'exist', 'name']
+  split        Epicea--EpiceaBrowsers: 8 releases, last 13 similarity 0.143 (ratio 0.80) ['ep', 'behavior', 'entry', 'log', 'change']
+  related      FileSystem--MonticelloFileTree: 7 releases, last 10 similarity 0.091 (ratio 0.84) ['file', 'directory', 'visit', 'write', 'path']
+  successor    FFI--UnifiedFFI: 7 releases, last 14 similarity 0.095 (ratio 0.86) ['ffi', 'external', 'type', 'field', 'handle']
+  related      Commander--SystemCommands: 7 releases, last 14 similarity 0.118 (ratio 0.48) ['menu', 'command', 'context', 'activation', 'item']
+  split        Fuel--FuelTests: 5 releases, last 6 similarity 0.099 (ratio 0.73) ['fl', 'instance', 'global', 'materialize', 'serialize']
+  related      MonticelloFileTree--Ring: 5 releases, last 7 similarity 0.078 (ratio 0.41) ['definition', 'class', 'trait', 'package', 'method']
+  successor    Refactoring--Refactoring2: 5 releases, last 11 similarity 0.102 (ratio 0.94) ['rb', 'class', 'variable', 'precondition', 'transform']
+  split        GeneralRules--Renraku: 4 releases, last 11 similarity 0.137 (ratio 1.14) ['re', 'rule', 'check', 'critique', 'name']
+  related      Slot--VariablesLibrary: 4 releases, last 14 similarity 0.096 (ratio 0.80) ['slot', 'read', 'test', 'write', 'variable']
+  split        Monticello--MonticelloGUI: 3 releases, last 5 similarity 0.077 (ratio 0.78) ['mc', 'version', 'repository', 'snapshot', 'package']
+  successor    Compiler--OpalCompiler: 3 releases, last 6 similarity 0.084 (ratio 0.78) ['temp', 'pop', 'node', 'variable', 'literal']
+  successor    BlueInk--EnlumineurFormatter: 3 releases, last 10 similarity 0.221 (ratio 0.86) ['space', 'configuration', 'expression', 'test', 'extra']
+  related      ClassParser--TraitsV2: 3 releases, last 10 similarity 0.092 (ratio 0.62) ['trait', 'class', 'slot', 'composition', 'definition']
+  split        General--Renraku: 3 releases, last 14 similarity 0.122 (ratio 1.02) ['rule', 're', 'critique', 'selector', 'check']
+  split        Monticello--MonticelloMocks: 3 releases, last 14 similarity 0.144 (ratio 1.25) ['mc', 'mock', 'class', 'initialize', 'variable']
+  related      MonticelloGUI--Tools: 2 releases, last 2 similarity 0.075 (ratio 0.89) ['selection', 'list', 'menu', 'selected', 'browse']
+  related      Gofer--Metacello: 2 releases, last 2 similarity 0.073 (ratio 0.46) ['gofer', 'version', 'repository', 'load', 'package']
+  related      NautilusRefactoring--Refactoring: 2 releases, last 3 similarity 0.082 (ratio 0.55) ['rb', 'refactoring', 'transform', 'precondition', 'class']
+  related      RPackage--Ring: 2 releases, last 4 similarity 0.075 (ratio 0.35) ['package', 'test', 'class', 'method', 'category']
+  related      Ring--Traits: 2 releases, last 4 similarity 0.082 (ratio 0.43) ['trait', 'definition', 'variable', 'pool', 'class']
+  related      Tests--TraitsV2: 2 releases, last 11 similarity 0.092 (ratio 0.89) ['trait', 'test', 'class', 'composition', 'alia']
+  related      FluidClassBuilder--TraitsV2: 2 releases, last 11 similarity 0.108 (ratio 0.73) ['trait', 'slot', 'class', 'side', 'test']
+  split        MonticelloFileTree--MonticelloRemoteRepositories: 2 releases, last 13 similarity 0.105 (ratio 0.40) ['mc', 'file', 'version', 'repository', 'directory']
+  related      ClassParser--Traits: 2 releases, last 14 similarity 0.096 (ratio 0.54) ['trait', 'class', 'composition', 'slot', 'test']
+  related      EmbeddedFreeType--Fonts: 2 releases, last 14 similarity 0.107 (ratio 0.41) ['font', 'provider', 'abstract', 'regular', 'name']
+  related      ClassDefinitionPrinters--ClassParser: 2 releases, last 14 similarity 0.107 (ratio 0.39) ['definition', 'class', 'string', 'slot', 'test']
+  related      Commander2--SystemCommands: 2 releases, last 14 similarity 0.104 (ratio 0.40) ['command', 'cm', 'context', 'name', 'executed']
+  split        MonticelloMocks--MonticelloRemoteRepositories: 2 releases, last 14 similarity 0.093 (ratio 0.37) ['mc', 'initialize', 'class', 'quadrant', 'inserting']
+  split        Ocompletion--OcompletionTests: 1 releases, last 1.0 similarity 0.115 (ratio 0.77) ['ec', 'entry', 'completion', 'model', 'var']
+  related      Metacello--MonticelloGUI: 1 releases, last 1.0 similarity 0.089 (ratio 0.40) ['spec', 'repository', 'version', 'package', 'load']
+  related      MonticelloGUI--ToolBuilder: 1 releases, last 1.0 similarity 0.085 (ratio 0.49) ['spec', 'list', 'menu', 'selection', 'button']
+  related      PreferenceBrowser--Services: 1 releases, last 1.0 similarity 0.084 (ratio 0.52) ['preference', 'button', 'category', 'get', 'provider']
+  tests        MorphicTests--OcompletionTests: 1 releases, last 1.0 similarity 0.082 (ratio 0.58) ['test', 'up', 'set', 'model', 'initialize']
+  related      MorphExamplesAndDemos--SoundMorphicUserInterface: 1 releases, last 1.0 similarity 0.078 (ratio 0.58) ['morph', 'step', 'time', 'color', 'bin']
+  split        Sound--SoundMorphicUserInterface: 1 releases, last 1.0 similarity 0.076 (ratio 0.68) ['sound', 'midi', 'event', 'pitch', 'channel']
+  successor    FileSystem--Files: 1 releases, last 2 similarity 0.077 (ratio 0.73) ['file', 'exist', 'write', 'path', 'read']
+  related      MonticelloGUI--Spec: 1 releases, last 2 similarity 0.069 (ratio 0.64) ['spec', 'widget', 'list', 'button', 'default']
+  tests        MorphicTests--NetworkTests: 1 releases, last 2 similarity 0.065 (ratio 0.72) ['test', 'up', 'set', 'out', 'line']
+  related      Compression--Files: 1 releases, last 2 similarity 0.064 (ratio 0.48) ['file', 'write', 'read', 'stream', 'named']
+  split        SmartSuggestions--SmartSuggestionsTests: 1 releases, last 3 similarity 0.154 (ratio 0.84) ['sug', 'valid', 'context', 'suggestion', 'label']
+  split        Slot--SlotTests: 1 releases, last 3 similarity 0.100 (ratio 0.73) ['slot', 'layout', 'class', 'extend', 'variable']
+  related      DebuggerActions--SmartSuggestions: 1 releases, last 3 similarity 0.086 (ratio 0.22) ['execute', 'label', 'debugger', 'text', 'action']
+  related      MonticelloFileTree--RPackage: 1 releases, last 4 similarity 0.076 (ratio 0.36) ['package', 'extension', 'class', 'method', 'trait']
+  related      MonticelloFileTree--Traits: 1 releases, last 4 similarity 0.075 (ratio 0.39) ['trait', 'definition', 'method', 'file', 'class']
+  split        FuelPlatform--FuelTests: 1 releases, last 5 similarity 0.081 (ratio 0.62) ['fl', 'test', 'serialization', 'fuel', 'stream']
+  successor    Deprecated50--UnifiedFFI: 1 releases, last 5 similarity 0.078 (ratio 0.39) ['external', 'type', 'structure', 'field', 'object']
+  split        Ombu--OmbuTests: 1 releases, last 6 similarity 0.224 (ratio 0.86) ['om', 'store', 'suffix', 'strategy', 'entry']
+  split        Epicea--EpiceaTests: 1 releases, last 6 similarity 0.109 (ratio 0.62) ['ep', 'entry', 'log', 'refactoring', 'change']
+  split        EpiceaBrowsers--EpiceaTests: 1 releases, last 6 similarity 0.109 (ratio 0.62) ['ep', 'log', 'monitor', 'entry', 'change']
+  related      GeneralRules--Refactoring: 1 releases, last 7 similarity 0.078 (ratio 0.71) ['rb', 'name', 'rule', 'check', 'unique']
+  related      ClassParser--FluidClassBuilder: 1 releases, last 11 similarity 0.092 (ratio 0.35) ['trait', 'class', 'slot', 'side', 'test']
+One project, several families: 17 pairs, e.g. Monticello--MonticelloFileTree (mc, definition, version); Epicea--EpiceaBrowsers (ep, behavior, entry)
+A family and its successor: 6 pairs, e.g. FFI--UnifiedFFI (ffi, external, type); Refactoring--Refactoring2 (rb, class, variable)
+Related subsystems: 28 pairs, e.g. Files--MonticelloFileTree (file, write, stream); FileSystem--MonticelloFileTree (file, directory, visit)
+Test families (setUp, tearDown): 2 pairs, e.g. MorphicTests--OcompletionTests (test, up, set); MorphicTests--NetworkTests (test, up, set)
+
+==> Done: tables and figures in results/, log in run.log

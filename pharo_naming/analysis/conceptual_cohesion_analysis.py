@@ -126,7 +126,7 @@ def analyze_release(
 
     is_test = TEST_CONVENTION["class"]
     untested = {name: entry for name, entry in documents.items() if not is_test(name.lower())}
-    ccp_untested, _, _ = family_ccp(untested)
+    ccp_untested, _, untested_data = family_ccp(untested)
 
     by_family: dict[str, list[IdentifierRecord]] = defaultdict(list)
     for record in records:
@@ -151,6 +151,7 @@ def analyze_release(
             "ccp_unprefixed": ccp_unprefixed.get(family, np.nan),
             "prefix_words": sorted(prefixes[family]),
             "ccp_untested": ccp_untested.get(family, np.nan),
+            "classes_untested": len(untested_data["rows"].get(family, ())) or np.nan,
         })
 
     summary = {
@@ -180,6 +181,7 @@ def release_correlations(rows: list[dict]) -> dict:
     ccp, size = column("ccp"), column("classes")
     class_pc, selector_pc = column("class_cohesion"), column("selector_cohesion")
     unprefixed, untested = column("ccp_unprefixed"), column("ccp_untested")
+    size_untested = column("classes_untested")
 
     def rho(x, y):
         keep = ~(np.isnan(x) | np.isnan(y))
@@ -190,6 +192,8 @@ def release_correlations(rows: list[dict]) -> dict:
         "class_pc_ccp_partial": partial_spearman(class_pc, ccp, size),
         "class_pc_ccp_unprefixed": rho(class_pc, unprefixed),
         "class_pc_ccp_untested": rho(class_pc, untested),
+        "class_pc_ccp_unprefixed_partial": partial_spearman(class_pc, unprefixed, size),
+        "class_pc_ccp_untested_partial": partial_spearman(class_pc, untested, size_untested),
         "selector_pc_ccp": rho(selector_pc, ccp),
         "selector_pc_ccp_partial": partial_spearman(selector_pc, ccp, size),
         "size_ccp": rho(size, ccp),
@@ -285,6 +289,8 @@ FAMILY_CORRELATIONS = (
     ("Class PC \u2013 CCP, size out", "class_pc_ccp_partial"),
     ("Class PC \u2013 CCP w/o prefix words", "class_pc_ccp_unprefixed"),
     ("Class PC \u2013 CCP w/o test classes", "class_pc_ccp_untested"),
+    ("Class PC \u2013 CCP w/o prefix words, size out", "class_pc_ccp_unprefixed_partial"),
+    ("Class PC \u2013 CCP w/o test classes, size out", "class_pc_ccp_untested_partial"),
     ("Selector PC \u2013 CCP", "selector_pc_ccp"),
     ("Selector PC \u2013 CCP, size out", "selector_pc_ccp_partial"),
     ("Size \u2013 CCP", "size_ccp"),
@@ -514,8 +520,10 @@ def main() -> None:
             f"{summary['above_random']:3} above random, baseline {summary['baseline']:.4f}, "
             f"rho(PC, CCP) {summary['class_pc_ccp']:+.2f} "
             f"(partial {summary['class_pc_ccp_partial']:+.2f}, "
-            f"no prefix {summary['class_pc_ccp_unprefixed']:+.2f}, "
-            f"no tests {summary['class_pc_ccp_untested']:+.2f}), "
+            f"no prefix {summary['class_pc_ccp_unprefixed']:+.2f} "
+            f"[partial {summary['class_pc_ccp_unprefixed_partial']:+.2f}], "
+            f"no tests {summary['class_pc_ccp_untested']:+.2f} "
+            f"[partial {summary['class_pc_ccp_untested_partial']:+.2f}]), "
             f"rho(selector PC, CCP) {summary['selector_pc_ccp']:+.2f} "
             f"(partial {summary['selector_pc_ccp_partial']:+.2f}), "
             f"rho(size, CCP) {summary['size_ccp']:+.2f}"
@@ -554,7 +562,7 @@ def main() -> None:
     print(f"{len(families)} families ranked in at least {MIN_RANKED_RELEASES} releases: {families}")
 
     for label, median, low, high in correlation_ranges(summaries, stability):
-        print(f"{label.strip():<32} median {median:+.2f}  range [{low:+.2f}, {high:+.2f}]")
+        print(f"{label.strip():<46} median {median:+.2f}  range [{low:+.2f}, {high:+.2f}]")
 
     # The system level reuses this module, hence the import here.
     from .system_ccp_analysis import report_system_level

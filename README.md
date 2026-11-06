@@ -17,7 +17,8 @@ connection for the first run (about 400 MB of downloads, kept in
 
 The terminal shows only the steps. Everything the scripts print, including
 every number quoted in the paper under the section it belongs to, is written
-to `run.log`.
+to `run.log`. The `run.log` of the reference run is included, so the numbers
+can be checked without running anything.
 
 ## Output
 
@@ -30,11 +31,11 @@ Everything is written to `results/`:
 | `robustness_trends.tex` | Table III |
 | `robustness_full.tex` | additional result: first and last values, change, Spearman rho and slope for all the robustness analyses (Section V-A); the trend at each prefix length is in `run.log` |
 | `cohesion_decomposition.tex` | Figure 1 |
-| `vocabulary_turnover.tex` | Figure 2 |
-| `family_contributions.tex` | Figure 3 |
-| `ccp_correlations.tex` | Figure 4 |
-| `ccp_prefix_cohesion.tex` | Figure 5 |
+| `family_contributions.tex` | Figure 2 |
+| `ccp_correlations.tex` | Figure 3 |
+| `vocabulary_turnover.tex` | additional result: vocabulary kept, added and removed between releases (Section V-A) |
 | `frequent_prefixes.tex` | additional result: most frequent prefixes (Section V-A) |
+| `ccp_prefix_cohesion.tex` | additional result: class-name prefix cohesion against CCP in Pharo 14 (Sections V-D and VI-C) |
 | `ccp_family_ranks.tex` | additional result: family rankings over time (Section V-D) |
 | `corpus/` | the extracted classes and methods, one file per release |
 

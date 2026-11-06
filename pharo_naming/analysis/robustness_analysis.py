@@ -289,7 +289,7 @@ def write_paper_robustness_table(path: Path, rows: list[dict]) -> None:
     lines = [
         r"\begin{table}[t]",
         r"\centering",
-        r"\caption{Change in prefix cohesion between \ph 1.0 and 14}",
+        r"\caption{Changes in prefix cohesion between \ph 1 and \ph 14}",
         r"\label{tab:robustness}",
         r"\footnotesize",
         r"\begin{tabular}{lrr}",
@@ -502,7 +502,9 @@ def main() -> None:
         print(
             f"  share of test identifiers per release: "
             f"{', '.join(f'{v} {s:.1%}' for v, s in zip(versions, tests['test_share']))} "
-            f"(from {min(tests['test_share']):.1%} to {max(tests['test_share']):.1%})"
+            f"(from {tests['test_share'][0]:.1%} in Pharo {versions[0]} to "
+            f"{tests['test_share'][-1]:.1%} in Pharo {versions[-1]}; lowest "
+            f"{min(tests['test_share']):.1%}, highest {max(tests['test_share']):.1%})"
         )
         print(
             f"  cohesion without them per release: "

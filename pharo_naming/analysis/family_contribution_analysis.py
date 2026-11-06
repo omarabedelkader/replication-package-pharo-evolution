@@ -189,8 +189,13 @@ def write_contribution_figure(path: Path, versions: list[str], results: dict[str
     plt.close(fig)
 
 
-# Project prefixes cited in the introduction: (release, family, prefixes).
-PROJECT_PREFIXES = (("1.0", "OB", ("OB", "OR")), ("14", "Calypso", ("Cly",)))
+# Project prefixes cited in the text: (release, family, prefixes).
+PROJECT_PREFIXES = (
+    ("1.0", "OB", ("OB", "OR")),
+    ("14", "Calypso", ("Cly",)),
+    ("14", "Metacello", ("Metacello",)),
+    ("14", "Athens", ("Athens",)),
+)
 
 
 def print_largest_drops(corpus: Corpus, count: int = 3) -> None:
@@ -202,6 +207,10 @@ def print_largest_drops(corpus: Corpus, count: int = 3) -> None:
     series = cohesion_series(releases, encoded, set())
     presence = family_presence(versions, releases)
     steps = np.diff(series)
+    print(
+        f"Class names, all {len(steps)} consecutive-release changes: "
+        + ", ".join(f"{before} -> {after} {step:+.4f}" for before, after, step in zip(versions, versions[1:], steps))
+    )
     for index in np.argsort(steps)[:count]:
         version = versions[index + 1]
         entering = {family for family, present in presence.items() if present[0] == version}

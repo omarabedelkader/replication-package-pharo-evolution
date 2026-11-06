@@ -254,20 +254,24 @@ def print_overview(metric_rows: list[dict], summary_rows: list[dict], minimum: i
 def print_named_families(metric_rows: list[dict], summary_rows: list[dict]) -> None:
     """Lifetime, mean cohesion, and first and last cohesion of the families named in the text."""
     series: dict[tuple[str, str], dict[str, float]] = defaultdict(dict)
+    sizes: dict[tuple[str, str], dict[str, int]] = defaultdict(dict)
     for row in metric_rows:
         if row["weighting"] == PRIMARY_WEIGHTING and row["aggregation"] == POOLED:
             series[(row["identifier_kind"], row["package_family"])][row["version"]] = row["cohesion"]
+            sizes[(row["identifier_kind"], row["package_family"])][row["version"]] = row["identifiers"]
     summaries = {(row["identifier_kind"], row["package_family"]): row for row in summary_rows}
     for identifier_kind, families in NAMED_FAMILIES.items():
         print(f"{PANEL_TITLES[identifier_kind]}: families named in the text")
         for family in families:
             row = summaries[(identifier_kind, family)]
             values = series[(identifier_kind, family)]
+            counts = sizes[(identifier_kind, family)]
             first, last = row["first_version"], row["last_version"]
             print(
                 f"  {family:<12} present {first} to {last}, mean cohesion "
                 f"{fmt(row['weighted_mean_cohesion'])}, {fmt(values[first])} in {first} and "
-                f"{fmt(values[last])} in {last}, range {fmt(row['range_cohesion'])}"
+                f"{fmt(values[last])} in {last}, range {fmt(row['range_cohesion'])}, "
+                f"{counts[first]:,} identifiers in {first} and {counts[last]:,} in {last}"
             )
 
 

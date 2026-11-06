@@ -98,13 +98,13 @@ step "Check of the corpus";                                         run pharo_na
 step "Table I: results/naming_conventions.tex";                     run pharo_naming.analysis.naming_conventions
 step "Table II: results/corpus_size.tex";                           run pharo_naming.analysis.corpus_statistics
 step "Whole-system prefix cohesion (numbers in run.log)";           run pharo_naming.analysis.global_analysis
-step "Figure 2: results/vocabulary_turnover.tex, results/frequent_prefixes.tex"
+step "Vocabulary turnover: results/vocabulary_turnover.tex, results/frequent_prefixes.tex"
 run pharo_naming.analysis.turnover_analysis
 step "Package families (numbers in run.log)";                       run pharo_naming.analysis.package_family_analysis
 step "Table III and Figure 1: results/robustness_trends.tex, results/cohesion_decomposition.tex, results/robustness_full.tex"
 run pharo_naming.analysis.robustness_analysis
-step "Figure 3: results/family_contributions.tex";                  run pharo_naming.analysis.family_contribution_analysis
-step "Figures 4 and 5: results/ccp_correlations.tex, results/ccp_prefix_cohesion.tex, results/ccp_family_ranks.tex"
+step "Figure 2: results/family_contributions.tex";                  run pharo_naming.analysis.family_contribution_analysis
+step "Figure 3: results/ccp_correlations.tex (also results/ccp_prefix_cohesion.tex, results/ccp_family_ranks.tex)"
 run pharo_naming.analysis.conceptual_cohesion_analysis
 step "Similarity between families (numbers in run.log)";            run pharo_naming.analysis.family_similarity_analysis
 
